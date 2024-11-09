@@ -10,12 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 407714}
   - component: {fileID: 10822452}
+  - component: {fileID: 241921695934529815}
   m_Layer: 0
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &407714
 Transform:
@@ -46,8 +47,8 @@ Light:
   m_Color: {r: 0.9264706, g: 0.96957403, b: 1, a: 1}
   m_Intensity: 2.8
   m_Range: 9.111757
-  m_SpotAngle: 164
-  m_InnerSpotAngle: 157.8725
+  m_SpotAngle: 50
+  m_InnerSpotAngle: 5
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -94,6 +95,18 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0.2
   m_ShadowAngle: 0
+--- !u!114 &241921695934529815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437ae8a32b6f81d498a23fedf89da199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &179298
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,12 +118,13 @@ GameObject:
   - component: {fileID: 428016}
   - component: {fileID: 3348786}
   - component: {fileID: 2309692}
+  - component: {fileID: 5866018165584263328}
   m_Layer: 0
   m_Name: Lamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 65
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &428016
 Transform:
@@ -179,6 +193,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5866018165584263328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437ae8a32b6f81d498a23fedf89da199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &186052
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +220,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &452254
 Transform:
