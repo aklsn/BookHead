@@ -81,8 +81,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
-        }
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
 
+                    if (hit.collider.gameObject.tag == "Door")
+                    {
+                        hit.collider.GetComponent<Door>().ChangeDoorState();
+                    }
+                }
+            }
+        }
 
         private void PlayLandingSound()
         {
@@ -231,6 +243,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
 
+  
 
         private void RotateView()
         {
