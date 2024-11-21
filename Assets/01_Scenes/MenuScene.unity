@@ -3655,6 +3655,14 @@ MonoBehaviour:
   sensitivitySlider: {fileID: 901653295}
   resolutionDropdown: {fileID: 1646839894}
   backButton: {fileID: 956023476}
+  mouseLook:
+    XSensitivity: 2
+    YSensitivity: 2
+    clampVerticalRotation: 1
+    MinimumX: -90
+    MaximumX: 90
+    smooth: 0
+    smoothTime: 5
 --- !u!82 &1694604539
 AudioSource:
   m_ObjectHideFlags: 0
