@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class UIController_J : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class UIController_J : MonoBehaviour
     [SerializeField] private Slider sensitivitySlider;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private Button backButton;
+
+    [SerializeField] private MouseLook mouseLook;
 
     private AudioSource audioSource;
     private Camera mainCamera;
@@ -31,9 +34,9 @@ public class UIController_J : MonoBehaviour
         soundSlider.maxValue = 100;
         soundSlider.value = audioSource.volume * 100;
 
-        sensitivitySlider.minValue = 0;
+        sensitivitySlider.minValue = 1;
         sensitivitySlider.maxValue = 10;
-        sensitivitySlider.value = 5; // Default sensitivity
+        sensitivitySlider.value = mouseLook.XSensitivity; // Default sensitivity
 
         // Populate resolution dropdown
         resolutionDropdown.options.Clear();
@@ -56,7 +59,7 @@ public class UIController_J : MonoBehaviour
 
     void StartGame()
     {
-        SceneManager.LoadScene("GameSceneName"); // Replace with your actual scene name
+        SceneManager.LoadScene("MapScene");
     }
 
     void ToggleOption()
@@ -76,8 +79,9 @@ public class UIController_J : MonoBehaviour
 
     void AdjustSensitivity()
     {
-        // Adjust sensitivity logic
-        Debug.Log("Sensitivity set to: " + sensitivitySlider.value);
+        mouseLook.XSensitivity = sensitivitySlider.value;
+        mouseLook.YSensitivity = sensitivitySlider.value;
+        Debug.Log("Sensitivity updated to : " + sensitivitySlider.value);
     }
 
     void AdjustResolution()
