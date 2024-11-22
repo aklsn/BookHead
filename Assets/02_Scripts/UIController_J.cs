@@ -11,49 +11,43 @@ public class UIController_J : MonoBehaviour
     [SerializeField] private Button optionButton;
     [SerializeField] private Button quitButton;
 
-    // New UI elements for settings
     [SerializeField] private Slider soundSlider;
     [SerializeField] private Slider sensitivitySlider;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private Button backButton;
 
-    [SerializeField] private MouseLook mouseLook;
-
     private AudioSource audioSource;
-    private Camera mainCamera;
 
     void Start()
     {
         // Initialize UI Components
         optionPanel.SetActive(false);
         audioSource = FindObjectOfType<AudioSource>();
-        mainCamera = Camera.main;
 
-        // Set initial values for sliders
+        // Set initial values from GameManager
         soundSlider.minValue = 0;
         soundSlider.maxValue = 100;
-        soundSlider.value = audioSource.volume * 100;
+        soundSlider.value = GameManager_J.Instance.masterVolume * 100;
 
         sensitivitySlider.minValue = 1;
         sensitivitySlider.maxValue = 10;
-        sensitivitySlider.value = mouseLook.XSensitivity; // Default sensitivity
+        sensitivitySlider.value = GameManager_J.Instance.mouseSensitivity;
 
         // Populate resolution dropdown
         resolutionDropdown.options.Clear();
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("1920x1080"));
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("1280x780"));
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("720x480"));
-        resolutionDropdown.value = 0; // Default resolution index
+        resolutionDropdown.value = 0;
 
-        // Add listeners to main menu buttons
+        // Add listeners to buttons and sliders
         startButton.onClick.AddListener(StartGame);
         optionButton.onClick.AddListener(ToggleOption);
         quitButton.onClick.AddListener(QuitGame);
 
-        // Add listeners to option panel controls
         soundSlider.onValueChanged.AddListener(delegate { AdjustSound(); });
         sensitivitySlider.onValueChanged.AddListener(delegate { AdjustSensitivity(); });
-        resolutionDropdown.onValueChanged.AddListener(delegate { AdjustResolution(); }); // 주석 해제
+        resolutionDropdown.onValueChanged.AddListener(delegate { AdjustResolution(); });
         backButton.onClick.AddListener(CloseOptionPanel);
     }
 
@@ -74,14 +68,14 @@ public class UIController_J : MonoBehaviour
 
     void AdjustSound()
     {
-        audioSource.volume = soundSlider.value / 100f;
+        GameManager_J.Instance.masterVolume = soundSlider.value / 100f;
+        audioSource.volume = GameManager_J.Instance.masterVolume;
     }
 
     void AdjustSensitivity()
     {
-        mouseLook.XSensitivity = sensitivitySlider.value;
-        mouseLook.YSensitivity = sensitivitySlider.value;
-        Debug.Log("Sensitivity updated to : " + sensitivitySlider.value);
+        GameManager_J.Instance.mouseSensitivity = sensitivitySlider.value;
+        Debug.Log("Sensitivity updated to : " + GameManager_J.Instance.mouseSensitivity);
     }
 
     void AdjustResolution()
