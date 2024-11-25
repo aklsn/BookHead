@@ -26,7 +26,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_CameraTargetRot = camera.localRotation;
         }
 
-
+        /// <summary>
+        /// 고개돌리기
+        /// </summary>
+        /// <param name="character"></param>
+        /// <param name="camera"></param>
         public void LookRotation(Transform character, Transform camera)
         {
             float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
