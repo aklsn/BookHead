@@ -909,7 +909,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -50}
+  m_AnchoredPosition: {x: 100, y: -50.00006}
   m_SizeDelta: {x: 100, y: -100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &473860958
@@ -3832,6 +3832,7 @@ GameObject:
   - component: {fileID: 1694604534}
   - component: {fileID: 1694604538}
   - component: {fileID: 1694604539}
+  - component: {fileID: 1694604540}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3936,13 +3937,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionPanel: {fileID: 260322662}
+  UIPanel: {fileID: 347886845}
   startButton: {fileID: 1666891439}
   optionButton: {fileID: 582407113}
   quitButton: {fileID: 2035812981}
-  soundSlider: {fileID: 743292222}
-  sensitivitySlider: {fileID: 901653295}
-  resolutionDropdown: {fileID: 1646839894}
-  backButton: {fileID: 956023476}
 --- !u!82 &1694604539
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4039,6 +4037,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1694604540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694604533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9536cd53827a6742ab3742ebb61c3e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  optionPanel: {fileID: 260322662}
+  soundSlider: {fileID: 743292222}
+  sensitivitySlider: {fileID: 901653295}
+  resolutionDropdown: {fileID: 1646839894}
+  backButton: {fileID: 956023476}
 --- !u!1 &1754286957
 GameObject:
   m_ObjectHideFlags: 0
