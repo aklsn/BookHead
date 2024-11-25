@@ -4070,6 +4070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterVolume: 1
   mouseSensitivity: 5
+  resolutionIndex: 0
 --- !u!4 &1754286959
 Transform:
   m_ObjectHideFlags: 0

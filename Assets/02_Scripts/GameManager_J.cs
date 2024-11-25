@@ -1,24 +1,67 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GameManager_J : MonoBehaviour
 {
     public static GameManager_J Instance;
 
-    public float masterVolume = 1f; // Àü¿ª »ç¿îµå °ª (0~1)
-    public float mouseSensitivity = 5f; // Àü¿ª ¸¶¿ì½º °¨µµ °ª (1~10)
+    public float masterVolume = 1f; // ë§ˆìŠ¤í„° ë³¼ë¥¨ (0~1)
+    public float mouseSensitivity = 5f; // ë§ˆìš°ìŠ¤ ê°ë„ (1~10)
+    public int resolutionIndex = 0; // í•´ìƒë„ ì¸ë±ìŠ¤ (0: 1920x1080, 1: 1280x720, 2: 720x480)
+
+    private string filePath;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // ¾À ÀüÈ¯ ½Ã À¯Áö
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); // Áßº¹ ¹æÁö
+            Destroy(gameObject);
+            return;
+        }
+         
+        filePath = Application.persistentDataPath + "/GameSetting.json";
+        LoadSettings(); // ê²Œì„ ì‹¤í–‰ ì‹œ ì„¤ì • ë¶ˆëŸ¬ì˜¤ê¸°
+    }
+
+    
+    /// <summary>
+    /// ì¬ì¤€ íŒŒì¼ ì €ì¥ ë¶ˆëŸ¬ì˜¤ê¸° ìŠ¤í¬ë¦½íŠ¸ ì¶”ê°€
+    /// </summary>
+    public void SaveSettings()
+    {
+        GameSetting settings = new GameSetting
+        {
+            masterVolume = masterVolume,
+            mouseSensitivity = mouseSensitivity,
+            resolutionIndex = resolutionIndex
+        };
+
+        string json = JsonUtility.ToJson(settings, true);
+        File.WriteAllText(filePath, json);
+        Debug.Log("í•´ë‹¹ ìœ„ì¹˜ì— ì €ì¥ë¨: " + filePath);
+    }
+
+    public void LoadSettings()
+    {
+        if (File.Exists(filePath))
+        {
+            string json = File.ReadAllText(filePath);
+            GameSetting settings = JsonUtility.FromJson<GameSetting>(json);
+
+            masterVolume = settings.masterVolume;
+            mouseSensitivity = settings.mouseSensitivity;
+            resolutionIndex = settings.resolutionIndex;
+
+            Debug.Log("í•´ë‹¹ ìœ„ì¹˜ì— ì €ì¥íŒŒì¼ ë¶ˆëŸ¬ì˜´: " + filePath);
+        }
+        else
+        {
+            Debug.Log("ê¸°ë³¸ ì„¸íŒ… íŒŒì¼ ì°¾ì„ ìˆ˜ ì—†ìŒ");
         }
     }
 }

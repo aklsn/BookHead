@@ -28,6 +28,7 @@ public class UIController_J : MonoBehaviour
         soundSlider.minValue = 0;
         soundSlider.maxValue = 100;
         soundSlider.value = GameManager_J.Instance.masterVolume * 100;
+        audioSource.volume = GameManager_J.Instance.masterVolume;      //재준 추가 사항
 
         sensitivitySlider.minValue = 1;
         sensitivitySlider.maxValue = 10;
@@ -38,7 +39,9 @@ public class UIController_J : MonoBehaviour
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("1920x1080"));
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("1280x780"));
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("720x480"));
-        resolutionDropdown.value = 0;
+        resolutionDropdown.value = GameManager_J.Instance.resolutionIndex;
+        
+        resolutionDropdown.RefreshShownValue();     //UI   업데이트
 
         // Add listeners to buttons and sliders
         startButton.onClick.AddListener(StartGame);
@@ -70,12 +73,14 @@ public class UIController_J : MonoBehaviour
     {
         GameManager_J.Instance.masterVolume = soundSlider.value / 100f;
         audioSource.volume = GameManager_J.Instance.masterVolume;
+        GameManager_J.Instance.SaveSettings();          //재준 : 파일저장
     }
 
     void AdjustSensitivity()
     {
         GameManager_J.Instance.mouseSensitivity = sensitivitySlider.value;
         Debug.Log("Sensitivity updated to : " + GameManager_J.Instance.mouseSensitivity);
+        GameManager_J.Instance.SaveSettings();          //재준 : 파일저장
     }
 
     void AdjustResolution()
@@ -92,6 +97,8 @@ public class UIController_J : MonoBehaviour
                 Screen.SetResolution(720, 480, FullScreenMode.Windowed);
                 break;
         }
+        
+        GameManager_J.Instance.SaveSettings();          //재준 : 파일저장
     }
 
     void CloseOptionPanel()
