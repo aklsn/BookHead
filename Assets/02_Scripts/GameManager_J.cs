@@ -23,9 +23,10 @@ public class GameManager_J : MonoBehaviour
         {
             Destroy(gameObject); // 중복 방지
         }
-        
+
         _filePath = Application.persistentDataPath +  "/OptionData.json";
         LoadOptionData();
+        Debug.Log(_filePath);
     }
 
     private void Start()
