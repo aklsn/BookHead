@@ -5,23 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class UIController_J : MonoBehaviour
 {
-    [SerializeField] private GameObject optionPanel; // ¿É¼Ç ÆĞ³Î
+    [SerializeField] private GameObject optionPanel; // ì˜µì…˜ íŒ¨ë„
     [SerializeField] private GameObject UIPanel;
-    [SerializeField] private Button startButton;     // °ÔÀÓ ½ÃÀÛ ¹öÆ°
-    [SerializeField] private Button optionButton;    // ¿É¼Ç ¿­±â ¹öÆ°
-    [SerializeField] private Button quitButton;      // °ÔÀÓ Á¾·á ¹öÆ°
+    [SerializeField] private Button startButton;     // ê²Œì„ ì‹œì‘ ë²„íŠ¼
+    [SerializeField] private Button optionButton;    // ì˜µì…˜ ì—´ê¸° ë²„íŠ¼
+    [SerializeField] private Button quitButton;      // ê²Œì„ ì¢…ë£Œ ë²„íŠ¼
 
     void Start()
     {
-        // ¿É¼Ç ÆĞ³Î ºñÈ°¼ºÈ­
+        // ì˜µì…˜ íŒ¨ë„ ë¹„í™œì„±í™”
         optionPanel.SetActive(false);
-        // ¹öÆ° ÀÌº¥Æ® µî·Ï
+        // ë²„íŠ¼ ì´ë²¤íŠ¸ ë“±ë¡
         startButton.onClick.AddListener(StartGame);
         optionButton.onClick.AddListener(ToggleOption);
         quitButton.onClick.AddListener(QuitGame);
     }
 
-    // °ÔÀÓ ½ÃÀÛ ¹öÆ°
+    // ê²Œì„ ì‹œì‘ ë²„íŠ¼
     void StartGame()
     {
         UIPanel.SetActive(false);
@@ -29,13 +29,13 @@ public class UIController_J : MonoBehaviour
         GameManager_J.Instance.UpdateAudioListener();
     }
 
-    // ¿É¼Ç ¹öÆ° (¿É¼Ç ÆĞ³Î ¿­±â/´İ±â)
+    // ì˜µì…˜ ë²„íŠ¼ (ì˜µì…˜ íŒ¨ë„ ì—´ê¸°/ë‹«ê¸°)
     void ToggleOption()
     {
         optionPanel.SetActive(!optionPanel.activeSelf);
     }
 
-    // °ÔÀÓ Á¾·á ¹öÆ°
+    // ê²Œì„ ì¢…ë£Œ ë²„íŠ¼
     void QuitGame()
     {
         Application.Quit();

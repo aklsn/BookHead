@@ -1,12 +1,15 @@
+using System.IO;
 using UnityEngine;
 
 public class GameManager_J : MonoBehaviour
 {
     public static GameManager_J Instance;
 
-    public float masterVolume = 1f; // Àü¿ª »ç¿îµå °ª (0~1)
-    public float mouseSensitivity = 5f; // Àü¿ª ¸¶¿ì½º °¨µµ °ª (1~10)
+    public float masterVolume = 1f; // ì „ì—­ ì‚¬ìš´ë“œ ê°’ (0~1)
+    public float mouseSensitivity = 5f; // ì „ì—­ ë§ˆìš°ìŠ¤ ê°ë„ ê°’ (1~10)
+    public int resolutionIndex = 0;     //ì¬ì¤€ : í•´ìƒë„ ì¸ë±ìŠ¤ (0 : 1920x1080 , 1 : 1280x780 , 2 : 720x480)
 
+    private string _filePath;   //ì¬ì¤€ : íŒŒì¼ê²½ë¡œ
     private AudioListener currentAudioListener;
 
     private void Awake()
@@ -14,20 +17,57 @@ public class GameManager_J : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // ¾À ÀüÈ¯ ½Ã À¯Áö
+            DontDestroyOnLoad(gameObject); // ì”¬ ì „í™˜ ì‹œ ìœ ì§€
         }
         else
         {
-            Destroy(gameObject); // Áßº¹ ¹æÁö
+            Destroy(gameObject); // ì¤‘ë³µ ë°©ì§€
         }
+        
+        _filePath = Application.persistentDataPath +  "/OptionData.json";
+        LoadOptionData();
     }
 
     private void Start()
     {
         UpdateAudioListener();
     }
+
+    public void SavaOptionData()
+    {
+        OptionData data = new OptionData
+        {
+            masterVolume = masterVolume,
+            mouseSensitivity = mouseSensitivity,
+            resolutionIndex = resolutionIndex
+        };
+        
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(_filePath, json);
+        Debug.Log("ì˜µì…˜ê°’ ì €ì¥ ë¨ : " + _filePath);
+    }
+
+    public void LoadOptionData()
+    {
+        if (File.Exists(_filePath))
+        {
+            string json = File.ReadAllText(_filePath);
+            OptionData data = JsonUtility.FromJson<OptionData>(json);
+            
+            masterVolume = data.masterVolume;
+            mouseSensitivity = data.mouseSensitivity;
+            resolutionIndex = data.resolutionIndex;
+            
+            Debug.Log("ë¶ˆëŸ¬ì˜´ : " + _filePath);
+        }
+        else
+        {
+            Debug.Log("íŒŒì¼ì„ ì°¾ì„ ìˆ˜ ì—†ìŒ");
+        }
+    }
+    
     /// <summary>
-    /// ¿Àµğ¿À ¸®½º³Ê ¾Ë¾Æ¼­ °¡Á®¿À°ÔÇØÁÜ.
+    /// ì˜¤ë””ì˜¤ ë¦¬ìŠ¤ë„ˆ ì•Œì•„ì„œ ê°€ì ¸ì˜¤ê²Œí•´ì¤Œ.
     /// </summary>
     public void UpdateAudioListener()
     {

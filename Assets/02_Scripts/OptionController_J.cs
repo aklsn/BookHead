@@ -4,26 +4,26 @@ using TMPro;
 
 public class OptionController_J : MonoBehaviour
 {
-    [SerializeField] private GameObject optionPanel; // ¿É¼Ç Ã¢
+    [SerializeField] private GameObject optionPanel; // ì˜µì…˜ ì°½
     [SerializeField] private Slider soundSlider;
     [SerializeField] private Slider sensitivitySlider;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private Button backButton;
 
-    private bool isOptionOpen = false; // ¿É¼Ç Ã¢ ¿­¸² ¿©ºÎ
+    private bool isOptionOpen = false; // ì˜µì…˜ ì°½ ì—´ë¦¼ ì—¬ë¶€
 
     private void Awake()
     {
-        // DontDestroyOnLoad·Î ¿É¼Ç UI À¯Áö
+        // DontDestroyOnLoadë¡œ ì˜µì…˜ UI ìœ ì§€
         DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        // ¿É¼Ç Ã¢ ÃÊ±âÈ­
+        // ì˜µì…˜ ì°½ ì´ˆê¸°í™”
         optionPanel.SetActive(false);
 
-        // ½½¶óÀÌ´õ¿Í µå·Ó´Ù¿î ÃÊ±âÈ­
+        // ìŠ¬ë¼ì´ë”ì™€ ë“œë¡­ë‹¤ìš´ ì´ˆê¸°í™”
         soundSlider.minValue = 0;
         soundSlider.maxValue = 100;
         soundSlider.value = GameManager_J.Instance.masterVolume * 100;
@@ -36,9 +36,11 @@ public class OptionController_J : MonoBehaviour
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("1920x1080"));
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("1280x780"));
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("720x480"));
-        resolutionDropdown.value = 0; // ±âº» ÇØ»óµµ
+        
+        resolutionDropdown.value = GameManager_J.Instance.resolutionIndex;      // ì¬ì¤€ : í•´ìƒë„ ë¶ˆëŸ¬ì˜¤ê¸° ìˆ˜ì •
+        resolutionDropdown.RefreshShownValue();
 
-        // ÀÌº¥Æ® µî·Ï
+        // ì´ë²¤íŠ¸ ë“±ë¡
         soundSlider.onValueChanged.AddListener(delegate { AdjustSound(); });
         sensitivitySlider.onValueChanged.AddListener(delegate { AdjustSensitivity(); });
         resolutionDropdown.onValueChanged.AddListener(delegate { AdjustResolution(); });
@@ -47,7 +49,7 @@ public class OptionController_J : MonoBehaviour
 
     private void Update()
     {
-        // ESC Å° ÀÔ·ÂÀ¸·Î ¿É¼Ç Ã¢ Åä±Û
+        // ESC í‚¤ ì…ë ¥ìœ¼ë¡œ ì˜µì…˜ ì°½ í† ê¸€
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ToggleOptionPanel();
@@ -59,14 +61,14 @@ public class OptionController_J : MonoBehaviour
         isOptionOpen = !isOptionOpen;
         optionPanel.SetActive(isOptionOpen);
 
-        // ¿É¼Ç Ã¢ ¿­¸®¸é °ÔÀÓ ¸ØÃã
+        // ì˜µì…˜ ì°½ ì—´ë¦¬ë©´ ê²Œì„ ë©ˆì¶¤
         if (isOptionOpen)
         {
-            Time.timeScale = 0; // °ÔÀÓ ÀÏ½ÃÁ¤Áö
+            Time.timeScale = 0; // ê²Œì„ ì¼ì‹œì •ì§€
         }
         else
         {
-            Time.timeScale = 1; // °ÔÀÓ Àç°³
+            Time.timeScale = 1; // ê²Œì„ ì¬ê°œ
         }
     }
 
@@ -74,19 +76,21 @@ public class OptionController_J : MonoBehaviour
     {
         isOptionOpen = false;
         optionPanel.SetActive(false);
-        Time.timeScale = 1; // °ÔÀÓ Àç°³
+        Time.timeScale = 1; // ê²Œì„ ì¬ê°œ
     }
 
     void AdjustSound()
     {
         GameManager_J.Instance.SetMasterVolume(soundSlider.value / 100f);
-        GameManager_J.Instance.UpdateAudioListener(); // AudioListener ¾÷µ¥ÀÌÆ®
+        GameManager_J.Instance.UpdateAudioListener(); // AudioListener ì—…ë°ì´íŠ¸
         Debug.Log("AdjustSound: Master Volume = " + GameManager_J.Instance.masterVolume);
+        GameManager_J.Instance.SavaOptionData();
     }
 
     private void AdjustSensitivity()
     {
         GameManager_J.Instance.mouseSensitivity = sensitivitySlider.value;
+        GameManager_J.Instance.SavaOptionData();
     }
 
     private void AdjustResolution()
@@ -103,5 +107,7 @@ public class OptionController_J : MonoBehaviour
                 Screen.SetResolution(720, 480, FullScreenMode.Windowed);
                 break;
         }
+
+        GameManager_J.Instance.SavaOptionData();
     }
 }
