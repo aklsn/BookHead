@@ -35,6 +35,20 @@ public class PlayerControl : MonoBehaviour
         _inputDirection = new Vector3(moveHorizontal, 0.0f, moveVertical).normalized;
 
         HandleMouseLook();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+
+                if (hit.collider.gameObject.tag == "Door")
+                {
+                    hit.collider.GetComponent<Door>().ChangeDoorState();
+                }
+            }
+        }
     }
 
     private void FixedUpdate()
