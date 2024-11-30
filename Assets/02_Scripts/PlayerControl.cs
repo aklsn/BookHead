@@ -42,10 +42,14 @@ public class PlayerControl : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-
                 if (hit.collider.gameObject.tag == "Door")
                 {
                     hit.collider.GetComponent<Door>().ChangeDoorState();
+                }
+
+                if (hit.collider.gameObject.tag == "Bed")
+                {
+                    hit.collider.GetComponent<BedScript_Raccoon>().IsClick = true;
                 }
             }
         }
