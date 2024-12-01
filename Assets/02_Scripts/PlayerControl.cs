@@ -15,9 +15,12 @@ public class PlayerControl : MonoBehaviour
     private Vector3 _initialCameraPosition;
     private float _bounceTimer;
     private float _xRotation = 0f;
+    private CharacterController controller;
 
     private void Start()
     {
+        controller = GetComponent<CharacterController>();
+
         _rb = GetComponent<Rigidbody>();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -30,9 +33,13 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-        _inputDirection = new Vector3(moveHorizontal, 0.0f, moveVertical).normalized;
+
+
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        Vector3 mov = new Vector3(h, 0, v);
+        this.transform.Translate(mov * Time.deltaTime * playerSpeed);
+        _inputDirection = new Vector3(h, 0.0f, v).normalized;
 
         HandleMouseLook();
 
@@ -68,9 +75,15 @@ public class PlayerControl : MonoBehaviour
     private void HandleMouseLook()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
+        _xRotation -= mouseY;
+        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f); 
+
+
         cameraTransform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+
+
         transform.Rotate(Vector3.up * mouseX);
     }
 
