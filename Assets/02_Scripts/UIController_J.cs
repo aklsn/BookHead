@@ -25,7 +25,7 @@ public class UIController_J : MonoBehaviour
     void StartGame()
     {
         UIPanel.SetActive(false);
-        SceneManager.LoadScene("MapScene");
+        SceneManager.LoadScene("MapScene_D");
         GameManager_J.Instance.UpdateAudioListener();
     }
 

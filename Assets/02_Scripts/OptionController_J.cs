@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class OptionController_J : MonoBehaviour
 {
+    public static OptionController_J Instance; // 싱글톤 인스턴스
+
     [SerializeField] private GameObject optionPanel; // 옵션 창
     [SerializeField] private Slider soundSlider;
     [SerializeField] private Slider sensitivitySlider;
@@ -14,8 +17,35 @@ public class OptionController_J : MonoBehaviour
 
     private void Awake()
     {
-        // DontDestroyOnLoad로 옵션 UI 유지
-        DontDestroyOnLoad(gameObject);
+        // 기존 OptionController_J 초기화 코드
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // EventSystem 관리
+        EnsureEventSystem();
+    }
+
+    private void EnsureEventSystem()
+    {
+        if (EventSystem.current == null)
+        {
+            GameObject eventSystem = new GameObject("EventSystem");
+            eventSystem.AddComponent<EventSystem>();
+            eventSystem.AddComponent<StandaloneInputModule>();
+            DontDestroyOnLoad(eventSystem);
+        }
+        else
+        {
+            DontDestroyOnLoad(EventSystem.current.gameObject);
+        }
     }
 
     private void Start()
@@ -28,16 +58,16 @@ public class OptionController_J : MonoBehaviour
         soundSlider.maxValue = 100;
         soundSlider.value = GameManager_J.Instance.masterVolume * 100;
 
-        sensitivitySlider.minValue = 1;
-        sensitivitySlider.maxValue = 10;
-        sensitivitySlider.value = GameManager_J.Instance.mouseSensitivity;
+        sensitivitySlider.minValue = 50;
+        sensitivitySlider.maxValue = 1000;
+        sensitivitySlider.value = GameManager_J.Instance.mouseSensitivity*100;
 
         resolutionDropdown.options.Clear();
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("1920x1080"));
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("1280x780"));
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("720x480"));
-        
-        resolutionDropdown.value = GameManager_J.Instance.resolutionIndex;      // 재준 : 해상도 불러오기 수정
+
+        resolutionDropdown.value = GameManager_J.Instance.resolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
         // 이벤트 등록
@@ -54,6 +84,12 @@ public class OptionController_J : MonoBehaviour
         {
             ToggleOptionPanel();
         }
+
+        // UI 클릭만 허용
+        if (isOptionOpen && EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("UI Clicked! Input on game objects is blocked.");
+        }
     }
 
     private void ToggleOptionPanel()
@@ -65,25 +101,33 @@ public class OptionController_J : MonoBehaviour
         if (isOptionOpen)
         {
             Time.timeScale = 0; // 게임 일시정지
+            Cursor.lockState = CursorLockMode.None; // 커서 잠금 해제
+            Cursor.visible = true; // 커서 표시
         }
         else
         {
             Time.timeScale = 1; // 게임 재개
+            Cursor.lockState = CursorLockMode.Locked; // 커서 잠금
+            Cursor.visible = false; // 커서 숨기기
         }
     }
 
-    private void CloseOptionPanel()
+    public void CloseOptionPanel()
     {
         isOptionOpen = false;
         optionPanel.SetActive(false);
         Time.timeScale = 1; // 게임 재개
     }
 
-    void AdjustSound()
+    public bool IsOptionOpen()
+    {
+        return isOptionOpen; // 옵션 창 상태 반환
+    }
+
+    private void AdjustSound()
     {
         GameManager_J.Instance.SetMasterVolume(soundSlider.value / 100f);
         GameManager_J.Instance.UpdateAudioListener(); // AudioListener 업데이트
-        Debug.Log("AdjustSound: Master Volume = " + GameManager_J.Instance.masterVolume);
         GameManager_J.Instance.SavaOptionData();
     }
 
@@ -91,6 +135,14 @@ public class OptionController_J : MonoBehaviour
     {
         GameManager_J.Instance.mouseSensitivity = sensitivitySlider.value;
         GameManager_J.Instance.SavaOptionData();
+
+        // PlayerControl의 mouseSensitivity 업데이트
+        var player = FindObjectOfType<PlayerControl>();
+        if (player != null)
+        {
+            player.mouseSensitivity = sensitivitySlider.value;
+            Debug.Log("PlayerControl sensitivity updated: " + player.mouseSensitivity);
+        }
     }
 
     private void AdjustResolution()

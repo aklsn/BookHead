@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -23,6 +22,8 @@ public class PlayerControl : MonoBehaviour
 
         _rb = GetComponent<Rigidbody>();
 
+        mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
+
         Cursor.lockState = CursorLockMode.Locked;
 
         if (cameraTransform != null)
@@ -33,42 +34,44 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
+        // 옵션 창이 열려 있는 경우
+        if (OptionController_J.Instance != null && OptionController_J.Instance.IsOptionOpen())
+        {
+            // UI 위에서 클릭이 발생했는지 확인
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            {
+                // UI 클릭 이벤트는 허용
+                return;
+            }
 
+            // UI 밖에서 클릭 시 게임 입력 차단
+            return;
+        }
 
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        Vector3 mov = new Vector3(h, 0, v);
-        this.transform.Translate(mov * Time.deltaTime * playerSpeed);
-        _inputDirection = new Vector3(h, 0.0f, v).normalized;
+        // 플레이어 이동 입력 처리
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+        _inputDirection = new Vector3(moveHorizontal, 0.0f, moveVertical).normalized;
 
+        // 마우스 회전 처리
         HandleMouseLook();
 
+        // 마우스 클릭 처리
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.gameObject.tag == "Door")
-                {
-                    hit.collider.GetComponent<Door>().ChangeDoorState();
-                }
-
-                if (hit.collider.gameObject.tag == "Bed")
-                {
-                    hit.collider.GetComponent<BedScript_Raccoon>().IsClick = true;
-                }
-            }
+            HandleMouseClick();
         }
     }
 
     private void FixedUpdate()
     {
+        // 플레이어 이동 처리
         Vector3 moveDirection = transform.TransformDirection(_inputDirection);
 
         Vector3 move = moveDirection * playerSpeed * Time.deltaTime;
         _rb.MovePosition(transform.position + move);
 
+        // 카메라 바운스 처리
         HandleCameraBounce();
     }
 
@@ -78,13 +81,34 @@ public class PlayerControl : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         _xRotation -= mouseY;
-        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f); 
-
+        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
 
         cameraTransform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
-
-
         transform.Rotate(Vector3.up * mouseX);
+    }
+
+    private void HandleMouseClick()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        float maxDistance = 1f; // 레이캐스트 최대 거리 (1미터)
+
+        if (Physics.Raycast(ray, out hit, maxDistance)) // 최대 거리 추가
+        {
+            if (hit.collider != null && hit.collider.CompareTag("Door"))
+            {
+                Door door = hit.collider.GetComponent<Door>();
+                if (door != null)
+                {
+                    door.ChangeDoorState();
+                    Debug.Log("Door clicked and state changed!");
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("No interactable object within 1 meter.");
+        }
     }
 
     private void HandleCameraBounce()
