@@ -29,9 +29,15 @@ public class playerTestD : MonoBehaviour
 
     private void Update()
     {
-        HandleMovement();
         HandleMouseLook();
-        HandleCameraBounce();
+
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        Vector3 mov = new Vector3(h, 0, v);
+        this.transform.Translate(mov * Time.deltaTime * playerSpeed);
+        _inputDirection = new Vector3(h, 0.0f, v).normalized;
+
+
 
         if (Input.GetMouseButtonDown(0)) // 마우스 클릭
         {
@@ -41,7 +47,7 @@ public class playerTestD : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Door"))
                 {
-                    Door door = hit.collider.GetComponent<Door>();
+                    doorControl door = hit.collider.GetComponent<doorControl>();
 
                     if (door != null)
                     {
@@ -52,14 +58,14 @@ public class playerTestD : MonoBehaviour
         }
     }
 
-    private void HandleMovement()
+        private void FixedUpdate()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        _inputDirection = new Vector3(h, 0, v).normalized;
+        Vector3 moveDirection = transform.TransformDirection(_inputDirection);
 
-        Vector3 move = transform.TransformDirection(_inputDirection) * playerSpeed * Time.deltaTime;
+        Vector3 move = moveDirection * playerSpeed * Time.deltaTime;
         _rb.MovePosition(transform.position + move);
+
+        HandleCameraBounce();
     }
 
     private void HandleCameraBounce()
@@ -82,11 +88,13 @@ public class playerTestD : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        transform.Rotate(Vector3.up * mouseX);
+        _xRotation -= mouseY;
+        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f); 
 
-        if (cameraTransform != null)
-        {
-            cameraTransform.localRotation = Quaternion.Euler(-mouseY, 0f, 0f);
-        }
+
+        cameraTransform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+
+
+        transform.Rotate(Vector3.up * mouseX);
     }
 }

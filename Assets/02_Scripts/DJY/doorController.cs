@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class doorControl : MonoBehaviour
 {
-    public bool open = false; // 문 상태
+    
     public float doorOpenAngle = 90f; // 열릴 각도
     public float doorCloseAngle = 0f; // 닫힐 각도
     public float smooth = 2f; // 애니메이션 속도
+
+    public roomControl connectedRoom1;
+    public roomControl connectedRoom2;
+
+    public AudioSource doorSound;
+
+    private bool open = false; // 문 상태
+    private bool isLocked = false;
 
     [Header("Room Settings")]
     public roomControl connectedRoom; // 연결된 방 컨트롤러
@@ -15,7 +23,7 @@ public class doorControl : MonoBehaviour
     void Update()
     {
         // 문 상태에 따른 회전
-        if (open)
+        if (open == true)
         {
             Quaternion targetRotation = Quaternion.Euler(0, doorOpenAngle, 0);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * smooth);
@@ -31,6 +39,17 @@ public class doorControl : MonoBehaviour
     {
         open = !open; // 문 상태 변경
         Debug.Log(open ? "문이 열렸습니다." : "문이 닫혔습니다.");
+
+        if (isLocked)
+        {
+            Debug.Log("문이 잠겨 있습니다.");
+            return;
+        }
+
+        if (doorSound != null)
+        {
+        doorSound.Play();
+        }
 
         // 연결된 방의 상태 변경
         if (connectedRoom != null)
