@@ -17,7 +17,6 @@ public class Door : MonoBehaviour
 
     public void ChangeDoorState()
     {
-        Debug.Log("ตส");
         open = !open;
     }
 

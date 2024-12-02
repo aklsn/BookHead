@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
+    public GameObject Bed;
     //public GameObject Player;
     //public GameObject Monster;
 
@@ -23,7 +24,7 @@ public class Trigger : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            GameObject.FindGameObjectWithTag("Monster").GetComponent<BookHead>().Trigger();
+            Bed.GetComponent<BedScript_Raccoon>().IsEventOn = true;
         }
     }
 }
