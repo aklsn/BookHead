@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class PlayerControl : MonoBehaviour
 {
     public float playerSpeed = 5f;
     public float mouseSensitivity = 100f;
     public Transform cameraTransform;
+    public Transform Spotlight;
     public float bounceAmplitude = 0.1f;
     public float bounceFrequency = 5f;
 
@@ -84,6 +86,7 @@ public class PlayerControl : MonoBehaviour
         _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
 
         cameraTransform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+        Spotlight.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
 
