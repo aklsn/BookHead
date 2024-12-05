@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 7563b90ed99d37f438cfdf2cfac66794
+  m_OcclusionCullingData: {fileID: 36300000, guid: 43c4f101c70a3e24395534cb5ccb52d2, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -213,10 +213,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0370fe0a3b51c9489017c1ad6a35e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  open: 0
   doorOpenAngle: 90
   doorCloseAngle: 0
   smooth: 2
+  connectedRoom1: {fileID: 0}
+  connectedRoom2: {fileID: 0}
+  doorSound: {fileID: 0}
   connectedRoom: {fileID: 0}
 --- !u!1 &249957580
 GameObject:
@@ -620,10 +622,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0370fe0a3b51c9489017c1ad6a35e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  open: 0
   doorOpenAngle: 90
   doorCloseAngle: -90
   smooth: 2
+  connectedRoom1: {fileID: 0}
+  connectedRoom2: {fileID: 0}
+  doorSound: {fileID: 0}
   connectedRoom: {fileID: 0}
 --- !u!1001 &531780184
 PrefabInstance:
@@ -728,10 +732,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0370fe0a3b51c9489017c1ad6a35e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  open: 0
   doorOpenAngle: 90
   doorCloseAngle: 0
   smooth: 2
+  connectedRoom1: {fileID: 0}
+  connectedRoom2: {fileID: 0}
+  doorSound: {fileID: 0}
   connectedRoom: {fileID: 0}
 --- !u!1 &686027387 stripped
 GameObject:
@@ -766,10 +772,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0370fe0a3b51c9489017c1ad6a35e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  open: 0
   doorOpenAngle: 90
   doorCloseAngle: -90
   smooth: 2
+  connectedRoom1: {fileID: 0}
+  connectedRoom2: {fileID: 0}
+  doorSound: {fileID: 0}
   connectedRoom: {fileID: 0}
 --- !u!1 &728526536
 GameObject:
@@ -940,10 +948,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0370fe0a3b51c9489017c1ad6a35e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  open: 0
   doorOpenAngle: 90
   doorCloseAngle: 0
   smooth: 2
+  connectedRoom1: {fileID: 0}
+  connectedRoom2: {fileID: 0}
+  doorSound: {fileID: 0}
   connectedRoom: {fileID: 0}
 --- !u!1 &1054902601 stripped
 GameObject:
@@ -978,10 +988,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0370fe0a3b51c9489017c1ad6a35e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  open: 0
   doorOpenAngle: 90
   doorCloseAngle: 0
   smooth: 2
+  connectedRoom1: {fileID: 0}
+  connectedRoom2: {fileID: 0}
+  doorSound: {fileID: 0}
   connectedRoom: {fileID: 0}
 --- !u!1 &1246184158 stripped
 GameObject:
@@ -1682,7 +1694,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522921914}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a382edc8251337441bafcb2273ada56b, type: 3}
   m_Name: 
@@ -1815,7 +1827,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522921914}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c02fb0cbc3a22e749a23814d0882cff6, type: 3}
   m_Name: 
@@ -1988,10 +2000,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0370fe0a3b51c9489017c1ad6a35e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  open: 0
   doorOpenAngle: 90
   doorCloseAngle: 0
   smooth: 2
+  connectedRoom1: {fileID: 0}
+  connectedRoom2: {fileID: 0}
+  doorSound: {fileID: 0}
   connectedRoom: {fileID: 0}
 --- !u!1 &1841094523 stripped
 GameObject:
