@@ -20,7 +20,7 @@ public class playerTestD : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
-
+        mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
         if (cameraTransform != null)
         {
             _initialCameraPosition = cameraTransform.localPosition;
