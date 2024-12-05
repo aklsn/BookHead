@@ -58,8 +58,8 @@ public class OptionController_J : MonoBehaviour
         soundSlider.maxValue = 100;
         soundSlider.value = GameManager_J.Instance.masterVolume * 100;
 
-        sensitivitySlider.minValue = 50;
-        sensitivitySlider.maxValue = 1000;
+        sensitivitySlider.minValue = 10;
+        sensitivitySlider.maxValue = 100;
         sensitivitySlider.value = GameManager_J.Instance.mouseSensitivity*100;
 
         resolutionDropdown.options.Clear();

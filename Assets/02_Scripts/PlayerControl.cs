@@ -7,7 +7,7 @@ public class PlayerControl : MonoBehaviour
     public float playerSpeed = 5f;
     public float mouseSensitivity = 100f;
     public Transform cameraTransform;
-    public Transform Spotlight;
+    //public Transform Spotlight;
     public float bounceAmplitude = 0.1f;
     public float bounceFrequency = 5f;
 
@@ -16,6 +16,7 @@ public class PlayerControl : MonoBehaviour
     private Vector3 _initialCameraPosition;
     private float _bounceTimer;
     private float _xRotation = 0f;
+    private float _yRotation = 0f;
     private CharacterController controller;
 
     private void Start()
@@ -67,9 +68,20 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // 플레이어 이동 처리
-        Vector3 moveDirection = transform.TransformDirection(_inputDirection);
+        // 카메라 기준 이동 방향 계산
+        Vector3 cameraForward = cameraTransform.forward; // 카메라의 앞쪽 방향
+        Vector3 cameraRight = cameraTransform.right;     // 카메라의 오른쪽 방향
 
+        // 수직 이동 제거 (평면 이동만 허용)
+        cameraForward.y = 0f;
+        cameraRight.y = 0f;
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        // 입력 방향을 카메라 방향에 동기화
+        Vector3 moveDirection = (cameraForward * _inputDirection.z + cameraRight * _inputDirection.x).normalized;
+
+        // 이동 처리
         Vector3 move = moveDirection * playerSpeed * Time.deltaTime;
         _rb.MovePosition(transform.position + move);
 
@@ -79,15 +91,19 @@ public class PlayerControl : MonoBehaviour
 
     private void HandleMouseLook()
     {
+        // 마우스 입력 받기
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
+        // 상하 회전 (Y축)
         _xRotation -= mouseY;
-        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
+        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f); // -90도 ~ 90도 제한
 
-        cameraTransform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
-        Spotlight.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
-        transform.Rotate(Vector3.up * mouseX);
+        // 좌우 회전 (X축)
+        _yRotation += mouseX;
+
+        // 카메라 회전 적용
+        cameraTransform.localRotation = Quaternion.Euler(_xRotation, _yRotation, 0f);
     }
 
     private void HandleMouseClick()
