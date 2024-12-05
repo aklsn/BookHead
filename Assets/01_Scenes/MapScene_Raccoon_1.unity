@@ -143,6 +143,8 @@ MonoBehaviour:
   doorOpenAngle: 0
   doorCloseAngle: -90
   smoot: 2
+  EventOn: 0
+  manager: {fileID: 0}
 --- !u!1 &17476231
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +181,7 @@ MonoBehaviour:
   playerSpeed: 2
   mouseSensitivity: 100
   cameraTransform: {fileID: 244713440}
+  Spotlight: {fileID: 651265575}
   bounceAmplitude: 0.1
   bounceFrequency: 10
 --- !u!54 &17476233
@@ -307,6 +310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 142519863}
+  - component: {fileID: 142519864}
   m_Layer: 0
   m_Name: GameManager_Raccoon
   m_TagString: Untagged
@@ -329,6 +333,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &142519864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142519862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e10af4e8898d21499abc21e8ee1705a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 17476237}
+  mirrorObject: {fileID: 1046851847}
+  monsterObject: {fileID: 0}
+  revealLocation: {fileID: 0}
+  bed: {fileID: 1598931852}
+  event_count: 1
+  activationAngle: 20
+  revealDelay: 0.1
+  disappearAngle: 45
+  MirrorEventActive: 0
 --- !u!1 &244713439
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,6 +531,8 @@ MonoBehaviour:
   doorOpenAngle: -90
   doorCloseAngle: 0
   smoot: 2
+  EventOn: 0
+  manager: {fileID: 0}
 --- !u!1 &260576923 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1030986557, guid: abc00000000002223016432056108006, type: 3}
@@ -557,6 +585,8 @@ MonoBehaviour:
   doorOpenAngle: -90
   doorCloseAngle: 0
   smoot: 2
+  EventOn: 0
+  manager: {fileID: 0}
 --- !u!1 &549856679 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2362938214196139425, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
@@ -941,6 +971,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 260576927}
   m_SourcePrefab: {fileID: 100100000, guid: abc00000000002223016432056108006, type: 3}
+--- !u!4 &1046851847 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5403296963150621910, guid: 8cbbbac207e04c34fbe08aac0c240a1f, type: 3}
+  m_PrefabInstance: {fileID: 1354299050}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1099590653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1166,11 +1201,6 @@ PrefabInstance:
       insertIndex: 3
       addedObject: {fileID: 2035590785}
   m_SourcePrefab: {fileID: 100100000, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
---- !u!1 &1149435693 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1737150353141608530, guid: 4c6094d815d4d38428464b4698540acc, type: 3}
-  m_PrefabInstance: {fileID: 1698282041212106782}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1156713319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,7 +1252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b0b86243d14e64887bf25ddcfe6b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bed: {fileID: 1149435693}
+  manager: {fileID: 142519862}
 --- !u!4 &1156713322
 Transform:
   m_ObjectHideFlags: 0
@@ -1401,6 +1431,8 @@ MonoBehaviour:
   doorOpenAngle: 128
   doorCloseAngle: 0
   smoot: 2
+  EventOn: 0
+  manager: {fileID: 0}
 --- !u!1001 &1354299050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1801,6 +1833,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.4999995, y: 2.4999995, z: 0.20000005}
   m_Center: {x: 0, y: 1.2499998, z: -0.00000022351742}
+--- !u!1 &1598931852 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1737150353141608530, guid: 4c6094d815d4d38428464b4698540acc, type: 3}
+  m_PrefabInstance: {fileID: 1698282041212106782}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1663728916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1905,6 +1942,8 @@ MonoBehaviour:
   doorOpenAngle: -90
   doorCloseAngle: 0
   smoot: 2
+  EventOn: 0
+  manager: {fileID: 0}
 --- !u!1001 &1882097572
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1983,6 +2022,8 @@ MonoBehaviour:
   doorOpenAngle: -90
   doorCloseAngle: 0
   smoot: 2
+  EventOn: 0
+  manager: {fileID: 0}
 --- !u!1 &1969385113 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 652408744055121089, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
@@ -2035,6 +2076,8 @@ MonoBehaviour:
   doorOpenAngle: 0
   doorCloseAngle: -90
   smoot: 2
+  EventOn: 0
+  manager: {fileID: 0}
 --- !u!1001 &1698282041212106782
 PrefabInstance:
   m_ObjectHideFlags: 0
