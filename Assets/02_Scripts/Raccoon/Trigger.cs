@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
-    public GameObject Bed;
+    public GameObject manager;
+    private bool on = false;
     //public GameObject Player;
     //public GameObject Monster;
 
@@ -22,9 +23,13 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (on == false)
         {
-            Bed.GetComponent<BedScript_Raccoon>().IsEventOn = true;
+            if (other.gameObject.tag == "Player")
+            {
+                on = true;
+                manager.GetComponent<GameManager_R>().event_count--;
+            }
         }
     }
 }
