@@ -23,6 +23,8 @@ public class playerTestD : MonoBehaviour
     public Sprite defaultSprite; // 기본 조준점 이미지
     public Sprite interactSprite; // 상호작용 조준점 이미지
 
+    public AudioSource S_Door;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -36,7 +38,7 @@ public class playerTestD : MonoBehaviour
 
     private void Update()
     {
-        mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
+        //mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
         // 옵션 창이 열려 있는 경우
         if (OptionController_J.Instance != null && OptionController_J.Instance.IsOptionOpen())
         {
@@ -77,6 +79,7 @@ public class playerTestD : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Door")) // 마우스 클릭
                 {
+                    S_Door.Play();
                     doorControl door = hit.collider.GetComponent<doorControl>();
 
                     if (door != null)
