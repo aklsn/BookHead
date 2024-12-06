@@ -5,7 +5,7 @@ using UnityEngine.Experimental.GlobalIllumination;
 public class PlayerControl : MonoBehaviour
 {
     public float playerSpeed = 5f;
-    public float mouseSensitivity = 100f;
+    public float mouseSensitivity = 0f;
     public Transform cameraTransform;
     //public Transform Spotlight;
     public float bounceAmplitude = 0.1f;

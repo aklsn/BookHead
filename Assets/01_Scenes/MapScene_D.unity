@@ -201,6 +201,9 @@ MonoBehaviour:
   doorOpenAngle: -90
   doorCloseAngle: 0
   smoot: 2
+  EventOn: 0
+  manager: {fileID: 0}
+  mannequinEventActive: {fileID: 0}
 --- !u!114 &235226877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,6 +613,9 @@ MonoBehaviour:
   doorOpenAngle: 0
   doorCloseAngle: -90
   smoot: 2
+  EventOn: 0
+  manager: {fileID: 0}
+  mannequinEventActive: {fileID: 0}
 --- !u!114 &522916041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,6 +726,9 @@ MonoBehaviour:
   doorOpenAngle: -90
   doorCloseAngle: 0
   smoot: 2
+  EventOn: 0
+  manager: {fileID: 0}
+  mannequinEventActive: {fileID: 0}
 --- !u!114 &624187488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,6 +769,9 @@ MonoBehaviour:
   doorOpenAngle: -90
   doorCloseAngle: 0
   smoot: 2
+  EventOn: 0
+  manager: {fileID: 0}
+  mannequinEventActive: {fileID: 0}
 --- !u!114 &686027394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -936,6 +948,9 @@ MonoBehaviour:
   doorOpenAngle: -90
   doorCloseAngle: 90
   smoot: 2
+  EventOn: 0
+  manager: {fileID: 0}
+  mannequinEventActive: {fileID: 0}
 --- !u!114 &983090340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -976,6 +991,9 @@ MonoBehaviour:
   doorOpenAngle: 128
   doorCloseAngle: 0
   smoot: 2
+  EventOn: 0
+  manager: {fileID: 0}
+  mannequinEventActive: {fileID: 0}
 --- !u!114 &1054902608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1694,7 +1712,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522921914}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a382edc8251337441bafcb2273ada56b, type: 3}
   m_Name: 
@@ -1827,7 +1845,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522921914}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c02fb0cbc3a22e749a23814d0882cff6, type: 3}
   m_Name: 
@@ -1988,6 +2006,9 @@ MonoBehaviour:
   doorOpenAngle: 0
   doorCloseAngle: -90
   smoot: 2
+  EventOn: 0
+  manager: {fileID: 0}
+  mannequinEventActive: {fileID: 0}
 --- !u!114 &1742411962
 MonoBehaviour:
   m_ObjectHideFlags: 0
