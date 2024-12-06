@@ -5,7 +5,7 @@ OcclusionCullingSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_OcclusionBakeSettings:
-    smallestOccluder: 3
+    smallestOccluder: 1
     smallestHole: 0.25
     backfaceThreshold: 100
   m_SceneGUID: 7563b90ed99d37f438cfdf2cfac66794
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0370fe0a3b51c9489017c1ad6a35e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorOpenAngle: -90
+  doorOpenAngle: 90
   doorCloseAngle: 0
   smooth: 2
   connectedRoom1: {fileID: 0}
@@ -740,7 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorOpenAngle: 90
-  doorCloseAngle: 0
+  doorCloseAngle: -90
   smooth: 2
   connectedRoom1: {fileID: 0}
   connectedRoom2: {fileID: 0}
@@ -895,8 +895,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0370fe0a3b51c9489017c1ad6a35e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorOpenAngle: -90
-  doorCloseAngle: 0
+  doorOpenAngle: 90
+  doorCloseAngle: -90
   smooth: 2
   connectedRoom1: {fileID: 0}
   connectedRoom2: {fileID: 0}
@@ -1160,7 +1160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0370fe0a3b51c9489017c1ad6a35e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorOpenAngle: -90
+  doorOpenAngle: 90
   doorCloseAngle: 0
   smooth: 2
   connectedRoom1: {fileID: 0}
@@ -1351,36 +1351,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8475849656246757419, guid: 8cbbbac207e04c34fbe08aac0c240a1f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1264363012}
     - targetCorrespondingSourceObject: {fileID: 7360760742118087411, guid: 8cbbbac207e04c34fbe08aac0c240a1f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1444137049}
   m_SourcePrefab: {fileID: 100100000, guid: 8cbbbac207e04c34fbe08aac0c240a1f, type: 3}
---- !u!1 &1264363010 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8475849656246757419, guid: 8cbbbac207e04c34fbe08aac0c240a1f, type: 3}
-  m_PrefabInstance: {fileID: 1264363009}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &1264363011 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 8856540306338864272, guid: 8cbbbac207e04c34fbe08aac0c240a1f, type: 3}
-  m_PrefabInstance: {fileID: 1264363009}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1264363012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1264363010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31946abe2be72104dabd57eefc93c797, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mirrorCamera: {fileID: 1264363011}
 --- !u!1 &1299355801 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2362938214196139425, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
@@ -2092,7 +2066,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2080747344786466946, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2094847321854537059, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -2412,7 +2386,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2806213603432241885, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2814601640375919441, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -3348,7 +3322,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5720937030488304508, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5803968878882483865, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -4228,7 +4202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8468104028945067466, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8492216207857060136, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -4997,7 +4971,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1473353327}
   bounceAmplitude: 0.05
   bounceFrequency: 10
-  cameraOffset: 0.2
+  cameraOffset: 0.4
   crosshair: {fileID: 2058361331}
   defaultSprite: {fileID: 21300000, guid: e4f1fee3de32377429fd1348fae62b10, type: 3}
   interactSprite: {fileID: 21300000, guid: 2a104a3f952ce16459e50de19cb44519, type: 3}
