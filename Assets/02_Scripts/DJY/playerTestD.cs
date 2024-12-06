@@ -95,6 +95,14 @@ public class playerTestD : MonoBehaviour
                         bed.IsClick = true;
                     }
                 }
+                else if (hit.collider.CompareTag("Light"))
+                {
+                    active_light light = hit.collider.GetComponent<active_light>();
+                    if (light != null)
+                    {
+                        light.ChangeLightState();
+                    }
+                }
             }
         }
         else
