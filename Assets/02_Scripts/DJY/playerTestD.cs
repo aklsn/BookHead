@@ -19,6 +19,11 @@ public class playerTestD : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
+
+        _rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        _rb.interpolation = RigidbodyInterpolation.Interpolate;
+
+
         Cursor.lockState = CursorLockMode.Locked;
         mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
         if (cameraTransform != null)
@@ -68,25 +73,35 @@ public class playerTestD : MonoBehaviour
         HandleCameraBounce();
     }
 
-    private void HandleCameraBounce()
+private void HandleCameraBounce()
+{
+    if (cameraTransform == null) return;
+
+    // 움직임이 있을 때만 흔들림 효과를 적용
+    if (_inputDirection.magnitude > 0.1f)
     {
-        if (cameraTransform == null) return;
-        if (_inputDirection.magnitude > 0.1f)
-        {
-            _bounceTimer += Time.deltaTime * bounceFrequency;
-            float bounceOffset = Mathf.Sin(_bounceTimer) * bounceAmplitude;
-            cameraTransform.localPosition = _initialCameraPosition + new Vector3(0, bounceOffset, 0);
-        }
-        else
-        {
-            cameraTransform.localPosition = _initialCameraPosition;
-        }
+        _bounceTimer += Time.deltaTime * bounceFrequency;
+        float bounceOffset = Mathf.Sin(_bounceTimer) * bounceAmplitude;
+
+        // Y축 흔들림 적용
+        Vector3 currentPosition = cameraTransform.localPosition;
+        currentPosition.y = Mathf.Lerp(currentPosition.y, _initialCameraPosition.y + bounceOffset, Time.deltaTime * 10f);
+        cameraTransform.localPosition = currentPosition;
     }
+    else
+    {
+        // 움직임이 없으면 원래 위치로 복귀
+        Vector3 currentPosition = cameraTransform.localPosition;
+        currentPosition.y = Mathf.Lerp(currentPosition.y, _initialCameraPosition.y, Time.deltaTime * 10f);
+        cameraTransform.localPosition = currentPosition;
+    }
+}
+
 
     private void HandleMouseLook()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+       float mouseX = Input.GetAxisRaw("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         _xRotation -= mouseY;
         _xRotation = Mathf.Clamp(_xRotation, -90f, 90f); 
