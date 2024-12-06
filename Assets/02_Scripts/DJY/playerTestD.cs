@@ -22,6 +22,7 @@ public class playerTestD : MonoBehaviour
     public Image crosshair;       // 조준점 UI 이미지
     public Sprite defaultSprite; // 기본 조준점 이미지
     public Sprite interactSprite; // 상호작용 조준점 이미지
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -62,16 +63,14 @@ public class playerTestD : MonoBehaviour
         RaycastHit hit;
         float maxDistance = 1f; // 레이캐스트 최대 거리 (1미터)
 
-        if (Physics.Raycast(ray, out hit, maxDistance)) 
+        if (Physics.Raycast(ray, out hit, maxDistance))
         {
-            if (hit.collider.CompareTag("Door")|| hit.collider.CompareTag("Bed"))
+            if (hit.collider.CompareTag("Door") || hit.collider.CompareTag("Bed"))
             {
-                // 태그가 "Interactable"이라면 조준점 변경
                 crosshair.sprite = interactSprite;
             }
             else
             {
-                // 다른 태그일 경우 기본 조준점 유지
                 crosshair.sprite = defaultSprite;
             }
             if (Input.GetMouseButtonDown(0))
@@ -95,6 +94,10 @@ public class playerTestD : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            crosshair.sprite = defaultSprite;
+        }
     }
 
     private void FixedUpdate()
@@ -107,12 +110,7 @@ public class playerTestD : MonoBehaviour
         HandleCameraBounce();
     }
 
-private void HandleCameraBounce()
-{
-    if (cameraTransform == null) return;
-
-    // 움직임이 있을 때만 흔들림 효과를 적용
-    if (_inputDirection.magnitude > 0.1f)
+    private void HandleCameraBounce()
     {
         if (cameraTransform == null) return;
         if (_inputDirection.magnitude > 0.1f)
@@ -125,20 +123,8 @@ private void HandleCameraBounce()
         {
             cameraTransform.localPosition = _initialCameraPosition + new Vector3(0, cameraOffset, 0);
         }
+    }
 
-        // Y축 흔들림 적용
-        Vector3 currentPosition = cameraTransform.localPosition;
-        currentPosition.y = Mathf.Lerp(currentPosition.y, _initialCameraPosition.y + bounceOffset, Time.deltaTime * 10f);
-        cameraTransform.localPosition = currentPosition;
-    }
-    else
-    {
-        // 움직임이 없으면 원래 위치로 복귀
-        Vector3 currentPosition = cameraTransform.localPosition;
-        currentPosition.y = Mathf.Lerp(currentPosition.y, _initialCameraPosition.y, Time.deltaTime * 10f);
-        cameraTransform.localPosition = currentPosition;
-    }
-}
 
     private void HandleMouseLook()
     {
