@@ -17,6 +17,9 @@ public class doorControl : MonoBehaviour
     private bool open = false; // 문 상태
     private bool isLocked = false;
 
+    public bool EventOn = false;
+    public GameObject manager;
+
     [Header("Room Settings")]
     public roomControl connectedRoom; // 연결된 방 컨트롤러
 
@@ -27,6 +30,12 @@ public class doorControl : MonoBehaviour
         {
             Quaternion targetRotation = Quaternion.Euler(0, doorOpenAngle, 0);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * smooth);
+            if (EventOn == true)
+            {
+                manager.GetComponent<GameManager_R>().event_count--;
+                manager.GetComponent<MannequinEvent>().mannequinEvent();
+                EventOn = false;
+            }
         }
         else
         {
