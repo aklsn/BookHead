@@ -27,7 +27,7 @@ public class PlayerControl : MonoBehaviour
 
         _rb = GetComponent<Rigidbody>();
 
-        mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
+        //mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
 
         Cursor.lockState = CursorLockMode.Locked;
 

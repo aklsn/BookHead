@@ -67,7 +67,7 @@ public class playerTestD : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, maxDistance))
         {
-            if (hit.collider.CompareTag("Door") || hit.collider.CompareTag("Bed"))
+            if (hit.collider.CompareTag("Door") || hit.collider.CompareTag("Bed") || hit.collider.CompareTag("Light"))
             {
                 crosshair.sprite = interactSprite;
             }
