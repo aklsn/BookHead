@@ -18,7 +18,7 @@ public class active_light : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ( LightOn )
+        if (LightOn)
         {
             _Light.intensity = targetIntensity;
         }

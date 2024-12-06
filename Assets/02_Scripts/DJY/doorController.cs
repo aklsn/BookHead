@@ -12,8 +12,6 @@ public class doorControl : MonoBehaviour
     public roomControl connectedRoom1;
     public roomControl connectedRoom2;
 
-    public AudioSource doorSound;
-
     private bool open = false; // 문 상태
     private bool isLocked = false;
 
@@ -55,10 +53,6 @@ public class doorControl : MonoBehaviour
             return;
         }
 
-        if (doorSound != null)
-        {
-        doorSound.Play();
-        }
 
         // 연결된 방의 상태 변경
         if (connectedRoom != null)
