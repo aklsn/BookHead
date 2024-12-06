@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
+using static UnityEngine.GraphicsBuffer;
 
 public class MannequinEvent : MonoBehaviour
 {
     //MannequinEvent
-    public GameObject[] mannequinsRevealPosition;
     public GameObject[] Mannequin;
     public GameObject mainMannequin;
     public GameObject blackoutPanel;
@@ -25,6 +25,10 @@ public class MannequinEvent : MonoBehaviour
     public float mannequin_revealDelay = 0.3f;
     public float mannequin_RotateDelay = 2f;
     Transform main_head = null;
+
+    public GameObject player;
+    public float distanceInFront = 2.0f;
+    public GameObject ControlDoor;
 
     // Start is called before the first frame update
     void Start()
@@ -99,17 +103,35 @@ public class MannequinEvent : MonoBehaviour
 
     IEnumerator mannequinRevealEvent()
     {
-        if (sequence < final_sequence)
+        isLight = false;
+        while (sequence < final_sequence)
         {
-            isLight = false;
-            blackoutPanel.SetActive(!blackoutPanel.activeSelf);
-            Destroy(Mannequin[sequence]);
+            if (sequence > 0)
+            {
+                Destroy(Mannequin[sequence - 1]);
+            }
+            blackoutPanel.SetActive(true);
             yield return new WaitForSeconds(mannequin_revealDelay);
-            Destroy(mainMannequin);
-            Mannequin[sequence].transform.position = mannequinsRevealPosition[sequence].transform.position;
-            blackoutPanel.SetActive(!blackoutPanel.activeSelf);
-            StartCoroutine(mannequinRevealEvent());
+            if (mainMannequin != null)
+            {
+                Destroy(mainMannequin);
+            }
+            Vector3 forwardDirection = player.transform.forward;
+            Vector3 newPosition = player.transform.position + forwardDirection * (distanceInFront+final_sequence-sequence-1);
+            Mannequin[sequence].transform.position = new Vector3(newPosition.x, 0, newPosition.z);
+            Vector3 targetDirection = new Vector3(player.transform.position.x, Mannequin[sequence].transform.position.y, player.transform.position.z);
+            Mannequin[sequence].transform.LookAt(targetDirection);
+            blackoutPanel.SetActive(false);
+            yield return new WaitForSeconds(mannequin_revealDelay);
             sequence++;
+            if (sequence == final_sequence)
+            {
+                blackoutPanel.SetActive(true);
+                Destroy(Mannequin[sequence - 1]);
+                yield return new WaitForSeconds(mannequin_revealDelay);
+                blackoutPanel.SetActive(false);
+            }
         }
+        ControlDoor.GetComponent<doorController>().CloseControl = false;
     }
-}
+  }

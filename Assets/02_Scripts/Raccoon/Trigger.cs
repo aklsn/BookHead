@@ -6,7 +6,9 @@ public class Trigger : MonoBehaviour
 {
     public GameObject manager;
     private bool on = false;
-    //public GameObject Player;
+    public GameObject Player;
+    public bool mannequinEventOn = false;
+    public GameObject ControlDoor;
     //public GameObject Monster;
 
     // Start is called before the first frame update
@@ -29,6 +31,12 @@ public class Trigger : MonoBehaviour
             {
                 on = true;
                 manager.GetComponent<GameManager_R>().event_count--;
+                if (mannequinEventOn == true )
+                {
+                    manager.GetComponent<MannequinEvent>().mannequinEvent();
+                    manager.GetComponent<MannequinEvent>().ControlDoor = ControlDoor;
+                    ControlDoor.GetComponent<doorController>().CloseControl = true;
+                }
             }
         }
     }

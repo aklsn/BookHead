@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class doorControl : MonoBehaviour
+public class doorController : MonoBehaviour
 {
     
     public float doorOpenAngle = 90f; // 열릴 각도
@@ -16,6 +16,7 @@ public class doorControl : MonoBehaviour
     private bool isLocked = false;
 
     public bool EventOn = false;
+    public bool CloseControl = false; // 인스펙터에서 체크해놓으면 문 잠기게
     public GameObject manager;
 
     [Header("Room Settings")]
@@ -23,6 +24,10 @@ public class doorControl : MonoBehaviour
 
     void Update()
     {
+        if (CloseControl == true) // true 면 문 닫히게
+        {
+            open = false;
+        }
         // 문 상태에 따른 회전
         if (open == true)
         {
@@ -31,7 +36,7 @@ public class doorControl : MonoBehaviour
             if (EventOn == true)
             {
                 manager.GetComponent<GameManager_R>().event_count--;
-                manager.GetComponent<MannequinEvent>().mannequinEvent();
+                //manager.GetComponent<MannequinEvent>().mannequinEvent();
                 EventOn = false;
             }
         }
@@ -44,7 +49,11 @@ public class doorControl : MonoBehaviour
 
     public void ChangeDoorState()
     {
-        open = !open; // 문 상태 변경
+        if (CloseControl == false)
+        {
+            open = !open; // 문 상태 변경
+        }
+
         Debug.Log(open ? "문이 열렸습니다." : "문이 닫혔습니다.");
 
         if (isLocked)
