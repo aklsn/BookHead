@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 //using UnityEngine.UIElements;
 
 public class UIController_J : MonoBehaviour
@@ -10,6 +11,8 @@ public class UIController_J : MonoBehaviour
     [SerializeField] private Button startButton;     // 게임 시작 버튼
     [SerializeField] private Button optionButton;    // 옵션 열기 버튼
     [SerializeField] private Button quitButton;      // 게임 종료 버튼
+
+    public String NextScene;
 
     void Start()
     {
@@ -25,7 +28,7 @@ public class UIController_J : MonoBehaviour
     void StartGame()
     {
         UIPanel.SetActive(false);
-        SceneManager.LoadScene("MapScene_D");
+        SceneManager.LoadScene(NextScene);
         GameManager_J.Instance.UpdateAudioListener();
     }
 
