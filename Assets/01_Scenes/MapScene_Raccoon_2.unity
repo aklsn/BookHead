@@ -182,7 +182,6 @@ MonoBehaviour:
   playerSpeed: 2
   mouseSensitivity: 100
   cameraTransform: {fileID: 244713440}
-  Spotlight: {fileID: 651265575}
   bounceAmplitude: 0.05
   bounceFrequency: 10
 --- !u!54 &17476233
@@ -299,7 +298,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 244713440}
-  - {fileID: 651265575}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &142519862
@@ -406,7 +404,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.561, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 651265575}
   m_Father: {fileID: 17476237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &244713441
@@ -1811,12 +1810,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651265574}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.062, y: 0.089, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.06199993, y: -0.472, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 17476237}
+  m_Father: {fileID: 244713440}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &651265576
 MonoBehaviour:
