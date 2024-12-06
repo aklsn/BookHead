@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1838909216639837039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 399642676698193136}
+  - component: {fileID: 1507407262000968194}
+  - component: {fileID: 6215048494388110407}
+  m_Layer: 0
+  m_Name: Cockroach_Normal_Simulation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &399642676698193136
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838909216639837039}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.26, y: 1, z: -3.92}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1507407262000968194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838909216639837039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d172c85f267e80f4fbb6decdfa68fb82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfEmissions: 100
+  emissionObject: {fileID: 6332647085466280051, guid: 34a27f31a3ffa5a4ca0ad5ee9d7212fb, type: 3}
+  simulationRange: 5.4
+  simulationHeigth: 2
+  settingsPreset: 1
+  moveSpeed: 0.75
+  rotationSpeed: 15
+  pauseTime: 2
+  surface_LayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  pathSteps: 30
+  surfaceDetectionRange: 0.5
+--- !u!114 &6215048494388110407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838909216639837039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8c98e7c9d7fce4384d9659929491e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: Walk
