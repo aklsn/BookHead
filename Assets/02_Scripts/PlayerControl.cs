@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Experimental.GlobalIllumination;
@@ -10,6 +11,7 @@ public class PlayerControl : MonoBehaviour
     //public Transform Spotlight;
     public float bounceAmplitude = 0.1f;
     public float bounceFrequency = 5f;
+    public float cameraOffset = 1f;
 
     private Rigidbody _rb;
     private Vector3 _inputDirection;
@@ -114,14 +116,26 @@ public class PlayerControl : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, maxDistance)) // 최대 거리 추가
         {
-            if (hit.collider != null && hit.collider.CompareTag("Door"))
+            if (hit.collider != null)
             {
-                Door door = hit.collider.GetComponent<Door>();
-                if (door != null)
+                if(hit.collider.CompareTag("Door"))
                 {
-                    door.ChangeDoorState();
-                    Debug.Log("Door clicked and state changed!");
+                    Door door = hit.collider.GetComponent<Door>();
+                    if (door != null)
+                    {
+                        door.ChangeDoorState();
+                        Debug.Log("Door clicked and state changed!");
+                    }
                 }
+                else if(hit.collider.CompareTag("Bed"))
+                {
+                    BedScript_Raccoon bed = hit.collider.GetComponent<BedScript_Raccoon>();
+                    if ( bed != null && bed.IsEventOn == true )
+                    {
+                        bed.IsClick = true;
+                    }
+                }
+
             }
         }
         else
@@ -137,11 +151,11 @@ public class PlayerControl : MonoBehaviour
         {
             _bounceTimer += Time.deltaTime * bounceFrequency;
             float bounceOffset = Mathf.Sin(_bounceTimer) * bounceAmplitude;
-            cameraTransform.localPosition = _initialCameraPosition + new Vector3(0, bounceOffset, 0);
+            cameraTransform.localPosition = _initialCameraPosition + new Vector3(0, bounceOffset + cameraOffset, 0) ;
         }
         else
         {
-            cameraTransform.localPosition = _initialCameraPosition;
+            cameraTransform.localPosition = _initialCameraPosition + new Vector3(0, cameraOffset, 0);
         }
     }
 }

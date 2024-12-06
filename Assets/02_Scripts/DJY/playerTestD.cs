@@ -22,7 +22,6 @@ public class playerTestD : MonoBehaviour
     public Image crosshair;       // 조준점 UI 이미지
     public Sprite defaultSprite; // 기본 조준점 이미지
     public Sprite interactSprite; // 상호작용 조준점 이미지
-
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -108,7 +107,12 @@ public class playerTestD : MonoBehaviour
         HandleCameraBounce();
     }
 
-    private void HandleCameraBounce()
+private void HandleCameraBounce()
+{
+    if (cameraTransform == null) return;
+
+    // 움직임이 있을 때만 흔들림 효과를 적용
+    if (_inputDirection.magnitude > 0.1f)
     {
         if (cameraTransform == null) return;
         if (_inputDirection.magnitude > 0.1f)
@@ -121,7 +125,20 @@ public class playerTestD : MonoBehaviour
         {
             cameraTransform.localPosition = _initialCameraPosition + new Vector3(0, cameraOffset, 0);
         }
+
+        // Y축 흔들림 적용
+        Vector3 currentPosition = cameraTransform.localPosition;
+        currentPosition.y = Mathf.Lerp(currentPosition.y, _initialCameraPosition.y + bounceOffset, Time.deltaTime * 10f);
+        cameraTransform.localPosition = currentPosition;
     }
+    else
+    {
+        // 움직임이 없으면 원래 위치로 복귀
+        Vector3 currentPosition = cameraTransform.localPosition;
+        currentPosition.y = Mathf.Lerp(currentPosition.y, _initialCameraPosition.y, Time.deltaTime * 10f);
+        cameraTransform.localPosition = currentPosition;
+    }
+}
 
     private void HandleMouseLook()
     {
