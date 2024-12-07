@@ -138,13 +138,13 @@ namespace Insect_VFX
         {
             if (newNumber < 1) return;
 
-            // Cambiar el tamaño de los arrays
+            // Cambiar el tama? de los arrays
             GameObject[] newEmittedObjects = new GameObject[newNumber];
             Vector3[] newTargetPositions = new Vector3[newNumber];
             float[] newPauseTimers = new float[newNumber];
             Vector3[][] newPathPoints = new Vector3[newNumber][];
 
-            // Copiar datos existentes si el nuevo tamaño es mayor al antiguo
+            // Copiar datos existentes si el nuevo tama? es mayor al antiguo
             int minLength = Mathf.Min(emittedObjects.Length, newNumber);
             for (int i = 0; i < minLength; i++)
             {
@@ -160,10 +160,10 @@ namespace Insect_VFX
             pauseTimers = newPauseTimers;
             pathPoints = newPathPoints;
 
-            // Ajustar el número de emisiones
+            // Ajustar el n?ero de emisiones
             numberOfEmissions = newNumber;
 
-            // Reiniciar la simulación para aplicar los cambios
+            // Reiniciar la simulaci? para aplicar los cambios
             RestartSimulation();
         }
 

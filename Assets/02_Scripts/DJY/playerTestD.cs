@@ -40,6 +40,8 @@ public class playerTestD : MonoBehaviour
     private bool isfootAudioPlay = false;
 
 
+    public AudioSource S_Door;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -53,10 +55,7 @@ public class playerTestD : MonoBehaviour
 
     private void Update()
     {
-
-
-
-        mouseSensitivity = GameManager_J.Instance.mouseSensitivity * 0.5f;
+        //mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
         // 옵션 창이 열려 있는 경우
         if (OptionController_J.Instance != null && OptionController_J.Instance.IsOptionOpen())
         {
@@ -86,7 +85,7 @@ public class playerTestD : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, maxDistance))
         {
-            if (hit.collider.CompareTag("Door") || hit.collider.CompareTag("Bed"))
+            if (hit.collider.CompareTag("Door") || hit.collider.CompareTag("Bed") || hit.collider.CompareTag("Light"))
             {
                 crosshair.sprite = interactSprite;
             }
@@ -98,7 +97,8 @@ public class playerTestD : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Door")) // 마우스 클릭
                 {
-                    doorControl door = hit.collider.GetComponent<doorControl>();
+                    S_Door.Play();
+                    doorController door = hit.collider.GetComponent<doorController>();
 
                     if (door != null)
                     {
@@ -111,6 +111,14 @@ public class playerTestD : MonoBehaviour
                     if (bed != null && bed.IsEventOn == true)
                     {
                         bed.IsClick = true;
+                    }
+                }
+                else if (hit.collider.CompareTag("Light"))
+                {
+                    active_light light = hit.collider.GetComponent<active_light>();
+                    if (light != null)
+                    {
+                        light.ChangeLightState();
                     }
                 }
             }

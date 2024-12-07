@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class doorControl : MonoBehaviour
+public class doorController : MonoBehaviour
 {
     
     public float doorOpenAngle = 90f; // 열릴 각도
@@ -12,21 +12,33 @@ public class doorControl : MonoBehaviour
     public roomControl connectedRoom1;
     public roomControl connectedRoom2;
 
-    public AudioSource doorSound;
-
     private bool open = false; // 문 상태
     private bool isLocked = false;
+
+    public bool EventOn = false;
+    public bool CloseControl = false; // 인스펙터에서 체크해놓으면 문 잠기게
+    public GameObject manager;
 
     [Header("Room Settings")]
     public roomControl connectedRoom; // 연결된 방 컨트롤러
 
     void Update()
     {
+        if (CloseControl == true) // true 면 문 닫히게
+        {
+            open = false;
+        }
         // 문 상태에 따른 회전
         if (open == true)
         {
             Quaternion targetRotation = Quaternion.Euler(0, doorOpenAngle, 0);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * smooth);
+            if (EventOn == true)
+            {
+                manager.GetComponent<GameManager_R>().event_count--;
+                //manager.GetComponent<MannequinEvent>().mannequinEvent();
+                EventOn = false;
+            }
         }
         else
         {
@@ -37,7 +49,11 @@ public class doorControl : MonoBehaviour
 
     public void ChangeDoorState()
     {
-        open = !open; // 문 상태 변경
+        if (CloseControl == false)
+        {
+            open = !open; // 문 상태 변경
+        }
+
         Debug.Log(open ? "문이 열렸습니다." : "문이 닫혔습니다.");
 
         if (isLocked)
@@ -46,10 +62,6 @@ public class doorControl : MonoBehaviour
             return;
         }
 
-        if (doorSound != null)
-        {
-        doorSound.Play();
-        }
 
         // 연결된 방의 상태 변경
         if (connectedRoom != null)

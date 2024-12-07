@@ -4010,7 +4010,7 @@ MonoBehaviour:
   startButton: {fileID: 1666891439}
   optionButton: {fileID: 582407113}
   quitButton: {fileID: 2035812981}
-  NextScene: MapScene_First
+  NextScene: mapScene_first_R
 --- !u!82 &1694604539
 AudioSource:
   m_ObjectHideFlags: 0
