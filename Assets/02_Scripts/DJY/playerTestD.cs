@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class playerTestD : MonoBehaviour
 {
+    //플레이어 기능
     public float playerSpeed = 5f;
     public float mouseSensitivity = 100f;
     public Transform cameraTransform;
@@ -13,15 +15,30 @@ public class playerTestD : MonoBehaviour
     public float bounceFrequency = 5f;
     public float cameraOffset = 1f;
 
+    //조준점
+    public Image crosshair;       
+    public Sprite defaultSprite;
+    public Sprite interactSprite; 
+
     private Rigidbody _rb;
     private Vector3 _inputDirection;
     private Vector3 _initialCameraPosition;
     private float _bounceTimer;
     private float _xRotation = 0f;
 
-    public Image crosshair;       // 조준점 UI 이미지
-    public Sprite defaultSprite; // 기본 조준점 이미지
-    public Sprite interactSprite; // 상호작용 조준점 이미지
+    //캐릭터 화면 전환(댐핑)
+    private float currentMouseX; 
+    private float currentMouseY; 
+    private float mouseXVelocity; 
+    private float mouseYVelocity; 
+    private float smoothTime = 0.1f;
+
+    //발소리
+    public AudioSource footAudioSource;
+    public AudioClip footAudioClip;
+    private bool isMoving = false;
+    private bool isfootAudioPlay = false;
+
 
     public AudioSource S_Door;
 
@@ -53,13 +70,14 @@ public class playerTestD : MonoBehaviour
             return;
         }
 
+        FootSteps();
+        HandleMouseLook();
+
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         Vector3 mov = new Vector3(h, 0, v);
         this.transform.Translate(mov * Time.deltaTime * playerSpeed);
         _inputDirection = new Vector3(h, 0.0f, v).normalized;
-
-        HandleMouseLook();
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -136,19 +154,43 @@ public class playerTestD : MonoBehaviour
         }
     }
 
-
     private void HandleMouseLook()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float targetMouseX = Input.GetAxis("Mouse X") * mouseSensitivity * 0.02f;
+        float targetMouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * 0.02f;
 
-        _xRotation -= mouseY;
+        // SmoothDamp
+        currentMouseX = Mathf.SmoothDamp(currentMouseX, targetMouseX, ref mouseXVelocity, smoothTime);
+        currentMouseY = Mathf.SmoothDamp(currentMouseY, targetMouseY, ref mouseYVelocity, smoothTime);
+
+        _xRotation -= currentMouseY;
         _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
-
 
         cameraTransform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
 
-
-        transform.Rotate(Vector3.up * mouseX);
+        transform.Rotate(Vector3.up * currentMouseX);
     }
+
+    private void FootSteps()
+    {
+        isMoving = Input.GetAxis("Horizontal") !=0 || Input.GetAxis("Vertical") !=0;
+
+        if(isMoving)
+        {
+            if(!isfootAudioPlay)
+            {
+                footAudioSource.clip = footAudioClip;
+                footAudioSource.loop = true;
+                footAudioSource.Play();
+                isfootAudioPlay = true;
+            }
+        }else
+        {
+            if(isfootAudioPlay){
+                footAudioSource.Stop();
+                isfootAudioPlay = false;
+            }
+        }
+    }
+
 }
