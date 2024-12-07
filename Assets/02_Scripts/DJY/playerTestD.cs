@@ -156,8 +156,8 @@ public class playerTestD : MonoBehaviour
 
     private void HandleMouseLook()
     {
-        float targetMouseX = Input.GetAxis("Mouse X") * mouseSensitivity * 0.02f;
-        float targetMouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * 0.02f;
+        float targetMouseX = Input.GetAxis("Mouse X") * mouseSensitivity * 0.01f;
+        float targetMouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * 0.01f;
 
         // SmoothDamp
         currentMouseX = Mathf.SmoothDamp(currentMouseX, targetMouseX, ref mouseXVelocity, smoothTime);
