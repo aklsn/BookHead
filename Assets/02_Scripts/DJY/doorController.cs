@@ -36,7 +36,7 @@ public class doorController : MonoBehaviour
             if (EventOn == true)
             {
                 manager.GetComponent<GameManager_R>().event_count--;
-                //manager.GetComponent<MannequinEvent>().mannequinEvent();
+                manager.GetComponent<MirrorEvent>().MirrorEventActive = true;
                 EventOn = false;
             }
         }

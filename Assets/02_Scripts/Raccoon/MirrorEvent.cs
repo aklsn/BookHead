@@ -1,62 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class MirrorEvent : MonoBehaviour
 {
-    public Transform player;
+    public Transform player;              
+    public Transform mirrorObject;        
+    public GameObject monsterObject;       
+    public Transform revealLocation;       
 
-    public Transform mirrorObject;
-    public Transform monsterObject;
+    public bool MirrorEventActive = false; 
 
-    public Transform revealLocation;
+    public float activationAngle = 10f;    
+    public float disappearAngle = 120f;      
+    public float mirrorRevealDelay = 0.1f; 
 
-    // MirrorEvent
-    public bool MirrorEventActive = false;
-
-    private bool isLookingAtMirror = false;
-    private bool eventTriggered = false;
+    private bool isLookingAtMirror = false; 
     private bool isMonsterVisible = false;
+    private bool isEventTriggered = false; 
 
-    public float activationAngle = 20f;
-    public float mirror_revealDelay = 0.1f;
-    public float disappearAngle = 45f;
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        monsterObject.position = new Vector3(0, -100, 0);
         isMonsterVisible = false;
+        HideMonster();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (MirrorEventActive == true)
+        if (MirrorEventActive)
         {
-            CheckMirrorLook();
-            CheckPlayerTurnAway();
+            CheckMirrorLook();    
+            CheckPlayerTurnAway();  
 
             if (isMonsterVisible)
             {
-                Vector3 directionToPlayer = player.position - monsterObject.position;
-                directionToPlayer.y = 0;
-                Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
-                monsterObject.rotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
+                FacePlayer();
             }
         }
     }
 
     void CheckMirrorLook()
     {
-    Vector3 toMirror = mirrorObject.position - player.position;
-    float angleToMirror = Vector3.Angle(player.forward, toMirror);
+        Vector3 toMirror = mirrorObject.position - player.position;
+        float angleToMirror = Vector3.Angle(player.forward, toMirror);
 
         if (angleToMirror < activationAngle)
         {
-            if (!isLookingAtMirror && !eventTriggered)
+            if (!isLookingAtMirror && !isEventTriggered)
             {
                 isLookingAtMirror = true;
                 StartCoroutine(TriggerMirrorMonsterEvent());
@@ -70,26 +60,28 @@ public class MirrorEvent : MonoBehaviour
 
     IEnumerator TriggerMirrorMonsterEvent()
     {
-        yield return new WaitForSeconds(mirror_revealDelay);
+        isEventTriggered = true;
+        yield return new WaitForSeconds(mirrorRevealDelay);
 
-        if (isLookingAtMirror)
+        if (isLookingAtMirror) 
         {
             PositionMonsterBehindPlayer();
+            ShowMonster();
             isMonsterVisible = true;
-            eventTriggered = true;
         }
-    }
 
+        isEventTriggered = false;
+    }
     void CheckPlayerTurnAway()
     {
         if (isMonsterVisible)
         {
-            Vector3 toMonster = monsterObject.position - player.position;
+            Vector3 toMonster = monsterObject.transform.position - player.position;
             float angleToMonster = Vector3.Angle(player.forward, toMonster);
 
-            if (angleToMonster < disappearAngle)
+            if (angleToMonster < disappearAngle) 
             {
-                monsterObject.position = new Vector3(0, -100, 0);
+                HideMonster();
                 isMonsterVisible = false;
             }
         }
@@ -98,8 +90,27 @@ public class MirrorEvent : MonoBehaviour
     void PositionMonsterBehindPlayer()
     {
         Vector3 behindPlayer = revealLocation.position;
-        behindPlayer.y = 0.1f;
+        behindPlayer.y = 0.0f; 
+        monsterObject.transform.position = behindPlayer;
+    }
 
-        monsterObject.position = behindPlayer;
+    void FacePlayer()
+    {
+        Vector3 directionToPlayer = player.position - monsterObject.transform.position;
+        directionToPlayer.y = 0;
+        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+        monsterObject.transform.rotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
+    }
+
+    // 몬스터 숨기기
+    void HideMonster()
+    {
+        monsterObject.transform.position = new Vector3(0.0f, -100.0f, 0.0f);
+    }
+
+    // 몬스터 보이기
+    void ShowMonster()
+    {
+        monsterObject.SetActive(true); // 활성화
     }
 }

@@ -110,20 +110,50 @@ public class MannequinEvent : MonoBehaviour
             {
                 Destroy(Mannequin[sequence - 1]);
             }
+
             blackoutPanel.SetActive(true);
             yield return new WaitForSeconds(mannequin_revealDelay);
+
             if (mainMannequin != null)
             {
                 Destroy(mainMannequin);
             }
+
             Vector3 forwardDirection = player.transform.forward;
-            Vector3 newPosition = player.transform.position + forwardDirection * (distanceInFront+final_sequence-sequence-1);
+            Vector3 newPosition = player.transform.position + forwardDirection * (distanceInFront + final_sequence - sequence - 1);
+
+            Ray ray = new Ray(new Vector3(newPosition.x, 1, newPosition.z), Vector3.down);
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+            {
+                Collider hitCollider = hit.collider;
+
+                if (hitCollider.bounds.size.y > 2.0f) 
+                {
+                    Vector3 adjustment = hit.normal * 1.5f; 
+                    newPosition += adjustment;
+                }
+            }
+
+            Collider[] colliders = Physics.OverlapBox(newPosition, Vector3.one * 0.5f);
+            foreach (var collider in colliders)
+            {
+                if (collider.bounds.size.y > 2.0f)
+                {
+                    Vector3 directionToMove = (newPosition - collider.transform.position).normalized;
+                    newPosition += directionToMove * 1.5f;
+                }
+            }
+
             Mannequin[sequence].transform.position = new Vector3(newPosition.x, 0, newPosition.z);
+
             Vector3 targetDirection = new Vector3(player.transform.position.x, Mannequin[sequence].transform.position.y, player.transform.position.z);
             Mannequin[sequence].transform.LookAt(targetDirection);
+
             blackoutPanel.SetActive(false);
             yield return new WaitForSeconds(mannequin_revealDelay);
+
             sequence++;
+
             if (sequence == final_sequence)
             {
                 blackoutPanel.SetActive(true);
@@ -132,6 +162,8 @@ public class MannequinEvent : MonoBehaviour
                 blackoutPanel.SetActive(false);
             }
         }
+
         ControlDoor.GetComponent<doorController>().CloseControl = false;
+
     }
-  }
+}
