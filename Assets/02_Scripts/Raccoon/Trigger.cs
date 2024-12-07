@@ -8,6 +8,8 @@ public class Trigger : MonoBehaviour
     private bool on = false;
     public GameObject Player;
     public bool mannequinEventOn = false;
+    public bool bloodflowEventOn = false;
+    public GameObject BloodEventObject;
     public GameObject ControlDoor;
     //public GameObject Monster;
 
@@ -36,6 +38,10 @@ public class Trigger : MonoBehaviour
                     manager.GetComponent<MannequinEvent>().mannequinEvent();
                     manager.GetComponent<MannequinEvent>().ControlDoor = ControlDoor;
                     ControlDoor.GetComponent<doorController>().CloseControl = true;
+                }
+                if (bloodflowEventOn == true)
+                {
+                    BloodEventObject.GetComponent<BloodFlowController>().BloodEvent();
                 }
             }
         }
