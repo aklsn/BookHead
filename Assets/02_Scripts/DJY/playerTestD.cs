@@ -186,11 +186,17 @@ public class playerTestD : MonoBehaviour
             }
         }else
         {
-            if(isfootAudioPlay){
-                footAudioSource.Stop();
-                isfootAudioPlay = false;
+            if (isfootAudioPlay)
+            {
+                StartCoroutine(StopAudioWithDelay(.3f)); // 1초 뒤에 소리 종료
             }
         }
     }
 
+    private IEnumerator StopAudioWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        footAudioSource.Stop();
+        isfootAudioPlay = false;
+    }
 }

@@ -54,7 +54,7 @@ public class MannequinEvent : MonoBehaviour
                     currentIntensity -= Time.deltaTime * 1.6f;
                 }
 
-                // currentIntensity °ªÀ» Ç×»ó Á¶¸í¿¡ ¹Ý¿µ
+                // currentIntensity ï¿½ï¿½ï¿½ï¿½ ï¿½×»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý¿ï¿½
                 for (int i = 0; i < _light.Length; i++)
                 {
                     _light[i].intensity = currentIntensity;
@@ -62,7 +62,7 @@ public class MannequinEvent : MonoBehaviour
             }
             else
             {
-                // ¸ñÇ¥ ¹à±â¿¡ µµ´ÞÇÏ¸é »õ·Î¿î targetIntensity ¼³Á¤
+                // ï¿½ï¿½Ç¥ ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ targetIntensity ï¿½ï¿½ï¿½ï¿½
                 targetIntensity = Random.Range(0.05f, 0.2f);
             }
         }
