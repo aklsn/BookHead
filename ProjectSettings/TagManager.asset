@@ -8,6 +8,7 @@ TagManager:
   - Door
   - Bed
   - Light
+  - LP
   layers:
   - Default
   - TransparentFX
