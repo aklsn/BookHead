@@ -12,10 +12,14 @@ public class DoorEventCheck : MonoBehaviour
     public bool ScuttleEventOn = false;
     public GameObject doorScuttle;
 
+    public bool Room1EventOn = false;
+    public GameObject doorRoom1;
+
     bool EventOn = false;
 
     private bool previousDoorMirrorState = false; 
     private bool previousDoorScuttleState = false;
+    private bool previousDoorRoom1State = false;
     [System.NonSerialized]
     public bool mannequinEventEnd = false;
     // Start is called before the first frame update
@@ -54,6 +58,20 @@ public class DoorEventCheck : MonoBehaviour
                         EventActive(doorScuttle);
                         manager.GetComponent<ScuttleEvent>().ScuttleEventActive = true;
                     }
+                }
+            }
+        }
+
+        if (Room1EventOn == true)
+        {
+            bool currentDoorRoom1State = doorRoom1.GetComponent<doorController>().open;
+
+            if (currentDoorRoom1State != previousDoorRoom1State)
+            {
+                if (currentDoorRoom1State == true)
+                {
+                    EventActive(doorRoom1);
+                    manager.GetComponent<Room1Event>().Room1EventActive = true;
                 }
             }
         }

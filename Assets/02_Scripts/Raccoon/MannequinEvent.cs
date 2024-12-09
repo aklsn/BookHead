@@ -30,6 +30,10 @@ public class MannequinEvent : MonoBehaviour
     public float distanceInFront = 2.0f;
     public GameObject ControlDoor;
 
+    public AudioSource MannequinAudioSource;
+    public AudioClip MannequinAudioClip;
+    private bool isAudioPlay = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -149,6 +153,7 @@ public class MannequinEvent : MonoBehaviour
             if (sequence == final_sequence)
             {
                 blackoutPanel.SetActive(true);
+                StartCoroutine(StopAudioWithDelay(.5f));
                 Destroy(Mannequin[sequence - 1]);
                 yield return new WaitForSeconds(mannequin_revealDelay);
                 blackoutPanel.SetActive(false);
@@ -157,5 +162,14 @@ public class MannequinEvent : MonoBehaviour
 
         ControlDoor.GetComponent<doorController>().CloseControl = false;
         gameObject.GetComponent<DoorEventCheck>().mannequinEventEnd = true;
+    }
+
+    private IEnumerator StopAudioWithDelay(float delay)
+    {
+        MannequinAudioSource.clip = MannequinAudioClip;
+        isAudioPlay = true;
+        MannequinAudioSource.Play();
+        yield return new WaitForSeconds(delay);
+        MannequinAudioSource.Stop();
     }
 }

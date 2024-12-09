@@ -113,7 +113,7 @@ public class MirrorEvent : MonoBehaviour
     // 몬스터 숨기기
     void HideMonster()
     {
-        monsterObject.transform.position = new Vector3(0.0f, -100.0f, 0.0f);
+        monsterObject.SetActive(false);
     }
 
     // 몬스터 보이기

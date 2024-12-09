@@ -12,6 +12,8 @@ public class ScuttleEvent : MonoBehaviour
     public AudioSource ScuttleAudioSource;
     public AudioClip ScuttleAudioClip;
 
+    private bool isAudioPlay = false;
+
     [System.NonSerialized]
     public bool ScuttleEventActive = false;
     void Start()
@@ -26,11 +28,24 @@ public class ScuttleEvent : MonoBehaviour
         {
             Mannequin.SetActive(true);
             float currentAngle = Mathf.LerpAngle(Scuttle.transform.eulerAngles.x, ScuttleOpenAngle, Time.deltaTime * rotationSpeed);
-            Scuttle.transform.localRotation = Quaternion.Euler(currentAngle, 0, 0); 
+            Scuttle.transform.localRotation = Quaternion.Euler(currentAngle, 0, 0);
+            if (isAudioPlay == false)
+            {
+                StartCoroutine(StopAudioWithDelay(.3f));
+            }
         }
         else
         {
             Mannequin.SetActive(false);
         }
+    }
+
+    private IEnumerator StopAudioWithDelay(float delay)
+    {
+        ScuttleAudioSource.clip = ScuttleAudioClip;
+        isAudioPlay = true;
+        ScuttleAudioSource.Play();
+        yield return new WaitForSeconds(delay);
+        ScuttleAudioSource.Stop();
     }
 }
