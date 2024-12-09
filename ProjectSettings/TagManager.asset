@@ -12,6 +12,7 @@ TagManager:
   - subcam
   - Lp
   - lpTrigger
+  - Tvcontroller
   layers:
   - Default
   - TransparentFX
