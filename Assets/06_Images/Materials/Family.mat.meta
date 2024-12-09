@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/06_Images/Materials/Family.mat.meta
 guid: 9a5165de09ee8974d86cb1235106cbf9
 NativeFormatImporter:
+========
+guid: 5f6c4b8ec5ea06a43a8ba311d70eb849
+DefaultImporter:
+>>>>>>>> 0325a5fccd9232d64695971cf792a4d4850f2eeb:Assets/98_Assets/LeartesStudios/Wills Room/URP/WillsRoomURP.unitypackage.meta
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 

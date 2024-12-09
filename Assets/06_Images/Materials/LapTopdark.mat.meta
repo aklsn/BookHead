@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/06_Images/Materials/LapTopdark.mat.meta
 guid: dd6df31ac9f03cf4593f4af636ee7fbb
 NativeFormatImporter:
+========
+guid: f0d3b49eec917284f8afcb5297b036cd
+DefaultImporter:
+>>>>>>>> 0325a5fccd9232d64695971cf792a4d4850f2eeb:Assets/98_Assets/StylArts/StylizedHouseInterior/BUILT-IN/Builtin_Stylized_Interior_House.unitypackage.meta
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 
