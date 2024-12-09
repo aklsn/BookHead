@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class doorController : MonoBehaviour
 {
-    
     public float doorOpenAngle = 90f; // 열릴 각도
     public float doorCloseAngle = 0f; // 닫힐 각도
     public float smooth = 2f; // 애니메이션 속도
@@ -12,12 +13,15 @@ public class doorController : MonoBehaviour
     public roomControl connectedRoom1;
     public roomControl connectedRoom2;
 
-    private bool open = false; // 문 상태
+    public GameObject manager;
+    public bool CloseControl = false; // 인스펙터에서 체크해놓으면 문 잠기게
+
+    [System.NonSerialized]
+    public bool open = false; // 문 상태
     private bool isLocked = false;
 
+    [System.NonSerialized]
     public bool EventOn = false;
-    public bool CloseControl = false; // 인스펙터에서 체크해놓으면 문 잠기게
-    public GameObject manager;
 
     [Header("Room Settings")]
     public roomControl connectedRoom; // 연결된 방 컨트롤러
@@ -33,12 +37,6 @@ public class doorController : MonoBehaviour
         {
             Quaternion targetRotation = Quaternion.Euler(0, doorOpenAngle, 0);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * smooth);
-            if (EventOn == true)
-            {
-                manager.GetComponent<GameManager_R>().event_count--;
-                manager.GetComponent<MirrorEvent>().MirrorEventActive = true;
-                EventOn = false;
-            }
         }
         else
         {

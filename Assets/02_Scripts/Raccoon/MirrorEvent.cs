@@ -7,8 +7,10 @@ public class MirrorEvent : MonoBehaviour
     public Transform player;              
     public Transform mirrorObject;        
     public GameObject monsterObject;       
-    public Transform revealLocation;       
+    public Transform revealLocation;
+    public Light _light;
 
+    [System.NonSerialized]
     public bool MirrorEventActive = false; 
 
     public float activationAngle = 10f;    
@@ -17,7 +19,7 @@ public class MirrorEvent : MonoBehaviour
 
     private bool isLookingAtMirror = false; 
     private bool isMonsterVisible = false;
-    private bool isEventTriggered = false; 
+    private bool isEventTriggered = false;
 
     void Start()
     {
@@ -37,6 +39,10 @@ public class MirrorEvent : MonoBehaviour
                 FacePlayer();
             }
         }
+        else
+        {
+            _light.intensity = 0.0f;
+        }
     }
 
     void CheckMirrorLook()
@@ -48,6 +54,7 @@ public class MirrorEvent : MonoBehaviour
         {
             if (!isLookingAtMirror && !isEventTriggered)
             {
+                _light.intensity = 0.6f;
                 isLookingAtMirror = true;
                 StartCoroutine(TriggerMirrorMonsterEvent());
             }
@@ -55,6 +62,7 @@ public class MirrorEvent : MonoBehaviour
         else
         {
             isLookingAtMirror = false;
+            _light.intensity = 0.0f;
         }
     }
 
@@ -111,6 +119,6 @@ public class MirrorEvent : MonoBehaviour
     // 몬스터 보이기
     void ShowMonster()
     {
-        monsterObject.SetActive(true); // 활성화
+        monsterObject.SetActive(true);
     }
 }
