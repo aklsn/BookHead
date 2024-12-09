@@ -98,7 +98,7 @@ public class playerTestD : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Door")) // 마우스 클릭
                 {
-                    S_Door.Play();
+                    // S_Door.Play();
                     doorController door = hit.collider.GetComponent<doorController>();
 
                     if (door != null)
