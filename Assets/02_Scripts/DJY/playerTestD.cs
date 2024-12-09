@@ -130,8 +130,11 @@ public class playerTestD : MonoBehaviour
                     LPTrigger lp = hit.collider.GetComponent<LPTrigger>();
                     if (lp != null)
                     {
+                        if (lp.IsLp)
+                        {
+                            LP.SetActive(false);
+                        }
                         lp.IsLp = false;
-                        LP.SetActive(false);
                     }
                 }
                 else if (hit.collider.CompareTag("Tvcontroller"))
@@ -141,9 +144,11 @@ public class playerTestD : MonoBehaviour
                     TVTrigger tv = hit.collider.GetComponent<TVTrigger>();
                     if (tv != null)
                     {
+                        if (tv.IsTv){
+                            TvNoise.SetActive(false);
+                            TV.SetActive(false);
+                        }
                         tv.IsTv = false;
-                        TvNoise.SetActive(false);
-                        TV.SetActive(false);
                     }
                 }
             }
