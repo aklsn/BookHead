@@ -144,7 +144,8 @@ public class playerTestD : MonoBehaviour
                     TVTrigger tv = hit.collider.GetComponent<TVTrigger>();
                     if (tv != null)
                     {
-                        if (tv.IsTv){
+                        if (tv.IsTv)
+                        {
                             TvNoise.SetActive(false);
                             TV.SetActive(false);
                         }
@@ -269,5 +270,13 @@ public class playerTestD : MonoBehaviour
                 }
             }
         }
+        if (other.CompareTag("CloseDoor"))
+        {
+            GameObject doorlook = GameObject.Find("doorLockManager");
+            LockableDoorManager1 dr = doorlook.GetComponent<LockableDoorManager1>();
+
+            dr.LockDoor();
+        }
     }
 }
+
