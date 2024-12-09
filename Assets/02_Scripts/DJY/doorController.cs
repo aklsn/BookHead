@@ -17,7 +17,6 @@ public class doorController : MonoBehaviour
 
     public bool EventOn = false;
     public bool CloseControl = false; // 인스펙터에서 체크해놓으면 문 잠기게
-    public GameObject manager;
 
     [Header("Room Settings")]
     public roomControl connectedRoom; // 연결된 방 컨트롤러
@@ -38,13 +37,6 @@ public class doorController : MonoBehaviour
                 {
                     photoChanger.ChangeFrameMaterial();
                 }
-
-            if (EventOn == true)
-            {
-                manager.GetComponent<GameManager_R>().event_count--;
-                manager.GetComponent<MirrorEvent>().MirrorEventActive = true;
-                EventOn = false;
-            }
         }
         else
         {

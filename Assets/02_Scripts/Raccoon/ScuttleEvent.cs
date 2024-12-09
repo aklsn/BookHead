@@ -42,6 +42,7 @@ public class ScuttleEvent : MonoBehaviour
 
     private IEnumerator StopAudioWithDelay(float delay)
     {
+        ScuttleAudioSource.clip = ScuttleAudioClip;
         isAudioPlay = true;
         ScuttleAudioSource.Play();
         yield return new WaitForSeconds(delay);
