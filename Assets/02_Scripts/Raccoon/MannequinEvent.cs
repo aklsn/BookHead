@@ -14,7 +14,7 @@ public class MannequinEvent : MonoBehaviour
     private int sequence = 0;
     private int final_sequence = 3;
 
-    public Light[] _light;
+    public Light _light;
     private float targetIntensity;
     private float currentIntensity;
     private float originalIntensity;
@@ -33,8 +33,9 @@ public class MannequinEvent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentIntensity = _light[0].intensity;
+        currentIntensity = _light.intensity;
         originalIntensity = currentIntensity;
+        _light.intensity = 0.0f;
         targetIntensity = Random.Range(0.05f, 0.1f);
     }
 
@@ -53,25 +54,16 @@ public class MannequinEvent : MonoBehaviour
                 {
                     currentIntensity -= Time.deltaTime * 1.6f;
                 }
-
-                // currentIntensity ���� �׻� ������ �ݿ�
-                for (int i = 0; i < _light.Length; i++)
-                {
-                    _light[i].intensity = currentIntensity;
-                }
+                _light.intensity = currentIntensity;
             }
             else
             {
-                // ��ǥ ��⿡ �����ϸ� ���ο� targetIntensity ����
-                targetIntensity = Random.Range(0.05f, 0.2f);
+                targetIntensity = Random.Range(0.2f, 0.7f);
             }
         }
         else
         {
-            for (int i = 0; i < _light.Length; i++)
-            {
-                _light[i].intensity = originalIntensity;
-            }
+            _light.intensity = 0.0f;
         }
     }
 
@@ -164,6 +156,6 @@ public class MannequinEvent : MonoBehaviour
         }
 
         ControlDoor.GetComponent<doorController>().CloseControl = false;
-
+        gameObject.GetComponent<DoorEventCheck>().mannequinEventEnd = true;
     }
 }
