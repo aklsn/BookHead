@@ -12,6 +12,9 @@ public class soundPlay : MonoBehaviour
     [Header("Target Point")]
     public Transform targetPoint; // 목표 위치
 
+    [Header("Door Manager")]
+    public LockableDoorManager doorManager; 
+
     private AudioSource audioSource;
     private bool audioPlayed = false; // 오디오가 이미 재생되었는지 확인
 
@@ -43,6 +46,20 @@ public class soundPlay : MonoBehaviour
             audioSource.Play();
             audioPlayed = true;
             Debug.Log("오디오 재생됨: " + audioClip.name);
+            StartCoroutine(UnlockDoorAfterSound());
+        }
+    }
+
+        private IEnumerator UnlockDoorAfterSound()
+    {
+        while (audioSource.isPlaying)
+        {
+            yield return null; // 오디오 재생이 끝날 때까지 대기
+        }
+
+        if (doorManager != null)
+        {
+            doorManager.UnlockDoor(); // 문 잠금 해제
         }
     }
 

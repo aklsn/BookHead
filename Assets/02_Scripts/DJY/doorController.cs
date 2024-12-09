@@ -53,6 +53,12 @@ public class doorController : MonoBehaviour
         }
     }
 
+    public void CloseDoor()
+    {
+        open = false; // 문 닫기
+        Debug.Log("문이 닫혔습니다.");
+    }
+
     public void ChangeDoorState()
     {
         if (CloseControl == false)
