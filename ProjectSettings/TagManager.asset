@@ -10,6 +10,8 @@ TagManager:
   - Light
   - Insect
   - subcam
+  - Lp
+  - lpTrigger
   layers:
   - Default
   - TransparentFX
