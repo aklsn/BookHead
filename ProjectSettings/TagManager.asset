@@ -12,6 +12,7 @@ TagManager:
   - subcam
   - Lp
   - lpTrigger
+  - CloseDoor
   layers:
   - Default
   - TransparentFX

@@ -223,5 +223,13 @@ private void OnTriggerEnter(Collider other)
             lp.sound1.Play(); // 사운드 재생
         }
     }
+
+    if(other.CompareTag("CloseDoor"))
+    {
+        GameObject doorlook = GameObject.Find("doorLockManager");
+        LockableDoorManager1 dr = doorlook.GetComponent<LockableDoorManager1>();
+
+        dr.LockDoor();
+    }
 }
 }
