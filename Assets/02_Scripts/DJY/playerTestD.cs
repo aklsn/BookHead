@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -85,7 +86,7 @@ public class playerTestD : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, maxDistance))
         {
-            if (hit.collider.CompareTag("Door") || hit.collider.CompareTag("Bed") || hit.collider.CompareTag("Light"))
+            if (hit.collider.CompareTag("Door") || hit.collider.CompareTag("Bed") || hit.collider.CompareTag("Light") || hit.collider.CompareTag("Lp"))
             {
                 crosshair.sprite = interactSprite;
             }
@@ -119,6 +120,14 @@ public class playerTestD : MonoBehaviour
                     if (light != null)
                     {
                         light.ChangeLightState();
+                    }
+                }
+                else if (hit.collider.CompareTag("Lp"))
+                {
+                    LPTrigger lp = hit.collider.GetComponent<LPTrigger>();
+                    if (lp != null)
+                    {
+                        lp.IsLp = false;
                     }
                 }
             }
@@ -198,5 +207,16 @@ public class playerTestD : MonoBehaviour
         yield return new WaitForSeconds(delay);
         footAudioSource.Stop();
         isfootAudioPlay = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("lpTrigger"))
+        {
+            GameObject lpPlayer = GameObject.FindWithTag("Lp");
+            LPTrigger lp = lpPlayer.GetComponent<LPTrigger>();
+            lp.IsLp = true;
+            lp.sound1.Play();
+        }
     }
 }
