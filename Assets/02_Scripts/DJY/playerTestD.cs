@@ -209,14 +209,19 @@ public class playerTestD : MonoBehaviour
         isfootAudioPlay = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+private void OnTriggerEnter(Collider other)
+{
+    if (other.CompareTag("lpTrigger"))
     {
-        if (other.CompareTag("lpTrigger"))
+        GameObject lpPlayer = GameObject.FindWithTag("Lp");
+        LPTrigger lp = lpPlayer.GetComponent<LPTrigger>();
+        
+        // 사운드가 재생 중인지 확인
+        if (!lp.sound1.isPlaying)
         {
-            GameObject lpPlayer = GameObject.FindWithTag("Lp");
-            LPTrigger lp = lpPlayer.GetComponent<LPTrigger>();
             lp.IsLp = true;
-            lp.sound1.Play();
+            lp.sound1.Play(); // 사운드 재생
         }
     }
+}
 }
