@@ -13,6 +13,8 @@ TagManager:
   - Lp
   - lpTrigger
   - CloseDoor
+  - Tvcontroller
+
   layers:
   - Default
   - TransparentFX

@@ -17,9 +17,9 @@ public class playerTestD : MonoBehaviour
     public float cameraOffset = 1f;
 
     //조준점
-    public Image crosshair;       
+    public Image crosshair;
     public Sprite defaultSprite;
-    public Sprite interactSprite; 
+    public Sprite interactSprite;
 
     private Rigidbody _rb;
     private Vector3 _inputDirection;
@@ -28,10 +28,10 @@ public class playerTestD : MonoBehaviour
     private float _xRotation = 0f;
 
     //캐릭터 화면 전환(댐핑)
-    private float currentMouseX; 
-    private float currentMouseY; 
-    private float mouseXVelocity; 
-    private float mouseYVelocity; 
+    private float currentMouseX;
+    private float currentMouseY;
+    private float mouseXVelocity;
+    private float mouseYVelocity;
     private float smoothTime = 0.1f;
 
     //발소리
@@ -86,7 +86,8 @@ public class playerTestD : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, maxDistance))
         {
-            if (hit.collider.CompareTag("Door") || hit.collider.CompareTag("Bed") || hit.collider.CompareTag("Light") || hit.collider.CompareTag("Lp"))
+            if (hit.collider.CompareTag("Door") || hit.collider.CompareTag("Bed") || hit.collider.CompareTag("Light") ||
+                hit.collider.CompareTag("Lp") || hit.collider.CompareTag("Tvcontroller"))
             {
                 crosshair.sprite = interactSprite;
             }
@@ -94,6 +95,7 @@ public class playerTestD : MonoBehaviour
             {
                 crosshair.sprite = defaultSprite;
             }
+
             if (Input.GetMouseButtonDown(0))
             {
                 if (hit.collider.CompareTag("Door")) // 마우스 클릭
@@ -124,10 +126,30 @@ public class playerTestD : MonoBehaviour
                 }
                 else if (hit.collider.CompareTag("Lp"))
                 {
+                    GameObject LP = GameObject.Find("LpTrigger");
                     LPTrigger lp = hit.collider.GetComponent<LPTrigger>();
                     if (lp != null)
                     {
+                        if (lp.IsLp)
+                        {
+                            LP.SetActive(false);
+                        }
                         lp.IsLp = false;
+                    }
+                }
+                else if (hit.collider.CompareTag("Tvcontroller"))
+                {
+                    GameObject TV = GameObject.Find("TvTrigger");
+                    GameObject TvNoise = GameObject.Find("TvNoise");
+                    TVTrigger tv = hit.collider.GetComponent<TVTrigger>();
+                    if (tv != null)
+                    {
+                        if (tv.IsTv)
+                        {
+                            TvNoise.SetActive(false);
+                            TV.SetActive(false);
+                        }
+                        tv.IsTv = false;
                     }
                 }
             }
@@ -182,18 +204,19 @@ public class playerTestD : MonoBehaviour
 
     private void FootSteps()
     {
-        isMoving = Input.GetAxis("Horizontal") !=0 || Input.GetAxis("Vertical") !=0;
+        isMoving = Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0;
 
-        if(isMoving)
+        if (isMoving)
         {
-            if(!isfootAudioPlay)
+            if (!isfootAudioPlay)
             {
                 footAudioSource.clip = footAudioClip;
                 footAudioSource.loop = true;
                 footAudioSource.Play();
                 isfootAudioPlay = true;
             }
-        }else
+        }
+        else
         {
             if (isfootAudioPlay)
             {
@@ -209,27 +232,51 @@ public class playerTestD : MonoBehaviour
         isfootAudioPlay = false;
     }
 
-private void OnTriggerEnter(Collider other)
-{
-    if (other.CompareTag("lpTrigger"))
+    private void OnTriggerEnter(Collider other)
     {
-        GameObject lpPlayer = GameObject.FindWithTag("Lp");
-        LPTrigger lp = lpPlayer.GetComponent<LPTrigger>();
-        
-        // 사운드가 재생 중인지 확인
-        if (!lp.sound1.isPlaying)
+        if (other.CompareTag("lpTrigger"))
         {
-            lp.IsLp = true;
-            lp.sound1.Play(); // 사운드 재생
+            GameObject lpPlayer = GameObject.FindWithTag("Lp");
+            LPTrigger lp = lpPlayer.GetComponent<LPTrigger>();
+
+            // 사운드가 재생 중인지 확인
+            if (!lp.sound1.isPlaying)
+            {
+                lp.IsLp = true;
+                lp.sound1.Play(); // 사운드 재생
+            }
+        }
+
+        if (other.gameObject.name == "TvTrigger")
+        {
+            GameObject TV = GameObject.Find("SM_TV_29");
+            GameObject remote = GameObject.Find("SM_Remote_11");
+            if (TV != null)
+            {
+                TVTrigger tv = remote.GetComponent<TVTrigger>();
+                if (tv != null)
+                {
+                    if (!tv.sound1.isPlaying)
+                    {
+                        tv.IsTv = true;
+                        tv.sound1.Play();
+                    }
+                    Transform tvNoiseTransform = TV.transform.Find("TvNoise");
+                    if (tvNoiseTransform != null)
+                    {
+                        GameObject tvNoiseObject = tvNoiseTransform.gameObject;
+                        tvNoiseObject.SetActive(true);
+                    }
+                }
+            }
+        }
+        if (other.CompareTag("CloseDoor"))
+        {
+            GameObject doorlook = GameObject.Find("doorLockManager");
+            LockableDoorManager1 dr = doorlook.GetComponent<LockableDoorManager1>();
+
+            dr.LockDoor();
         }
     }
-
-    if(other.CompareTag("CloseDoor"))
-    {
-        GameObject doorlook = GameObject.Find("doorLockManager");
-        LockableDoorManager1 dr = doorlook.GetComponent<LockableDoorManager1>();
-
-        dr.LockDoor();
-    }
 }
-}
+
