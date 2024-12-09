@@ -47,6 +47,10 @@ namespace Insect_VFX
         bool dieOnFinishPath = false;
         bool debugMode = false;
 
+        public float xOffset = 0f;
+        public float yOffset = 0f; // z좌표 오프셋 추가
+        public float zOffset = 0f;
+
         #region Public Methods
 
         public void StartSimulation()
@@ -61,11 +65,11 @@ namespace Insect_VFX
 
             RaycastHit hit;
             Physics.Raycast(transform.position, -transform.up, out hit, 100, surface_LayerMask);
-            spawnOrigin = hit.point + Vector3.down * 0.25f;
-
+            //spawnOrigin = hit.point + Vector3.down * 0.25f;
+            spawnOrigin = transform.position;
             for (int i = 0; i < numberOfEmissions; i++)
             {
-                SpawnEntity(i, hit.point, Quaternion.FromToRotation(transform.up, hit.normal));
+                SpawnEntity(i, /*hit.point*/spawnOrigin, Quaternion.FromToRotation(transform.up, hit.normal));
             }
         }
 
@@ -270,6 +274,10 @@ namespace Insect_VFX
             {
                 entity = Instantiate(emissionObject, entityParent);
             }
+
+            position.x += xOffset;
+            position.y += yOffset;
+            position.z += zOffset;
 
             entity.transform.position = position;
             entity.transform.rotation = rotation;
