@@ -2094,6 +2094,7 @@ MonoBehaviour:
   CloseControl: 1
   manager: {fileID: 0}
   connectedRoom: {fileID: 0}
+  doorTrigger: {fileID: 0}
 --- !u!4 &235226878 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7473348504496469505, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
@@ -3738,7 +3739,7 @@ GameObject:
   - component: {fileID: 437134746}
   - component: {fileID: 437134745}
   m_Layer: 0
-  m_Name: Audio Source2
+  m_Name: room1_Audio Source2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3753,7 +3754,7 @@ Transform:
   m_GameObject: {fileID: 437134743}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.763, y: 0, z: 2.616}
+  m_LocalPosition: {x: -2.971, y: -0.534, z: -5.565}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3771,9 +3772,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c921212f19b56f4c8a476358ebfc2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: bb317e58130f6514fb3b858d41440887, type: 3}
   triggerRadius: 1
-  targetPoint: {fileID: 0}
+  targetPoint: {fileID: 1522921920}
+  doorManager: {fileID: 0}
 --- !u!82 &437134746
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3794,7 +3796,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.1759291
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -3830,7 +3832,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -4296,7 +4298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 480340, guid: 2f1666ad9b7fdd7459a360619d6ccffd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.23800004
       objectReference: {fileID: 0}
     - target: {fileID: 480340, guid: 2f1666ad9b7fdd7459a360619d6ccffd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4540,6 +4542,7 @@ MonoBehaviour:
   audioClip: {fileID: 0}
   triggerRadius: 1
   targetPoint: {fileID: 0}
+  doorManager: {fileID: 0}
 --- !u!82 &507029197
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4596,7 +4599,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5570,25 +5573,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 125954931226619625, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
   m_PrefabInstance: {fileID: 1441128619}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &624187483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 624187481}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3612c336fd53014c84ffdafda6f1031, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  open: 0
-  doorOpenAngle: -90
-  doorCloseAngle: 0
-  smoot: 2
-  EventOn: 0
-  manager: {fileID: 0}
-  mannequinEventActive: {fileID: 0}
 --- !u!114 &624187488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5611,6 +5595,21 @@ MonoBehaviour:
   CloseControl: 0
   manager: {fileID: 0}
   connectedRoom: {fileID: 0}
+  doorTrigger: {fileID: 0}
+--- !u!114 &624187493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624187481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a98928a5ab9aa1409ca982c3d96939f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlledDoor: {fileID: 0}
+  lockTrigger: {fileID: 0}
 --- !u!1001 &641868979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5753,6 +5752,7 @@ GameObject:
   m_Component:
   - component: {fileID: 658163517}
   - component: {fileID: 658163518}
+  - component: {fileID: 658163519}
   m_Layer: 0
   m_Name: SoundTriggerPoint2
   m_TagString: Untagged
@@ -5769,7 +5769,7 @@ Transform:
   m_GameObject: {fileID: 658163516}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.986, y: -1.045, z: 0.336}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5794,8 +5794,35 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.18221581, z: 1}
-  m_Center: {x: 0, y: 0.4088921, z: 0}
+  m_Size: {x: 1, y: 0.71749794, z: 1}
+  m_Center: {x: 0, y: 0.6765333, z: 0}
+--- !u!54 &658163519
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658163516}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &675841479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8308,6 +8335,7 @@ MonoBehaviour:
   CloseControl: 0
   manager: {fileID: 0}
   connectedRoom: {fileID: 0}
+  doorTrigger: {fileID: 0}
 --- !u!1001 &1013028330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8488,6 +8516,7 @@ MonoBehaviour:
   audioClip: {fileID: 0}
   triggerRadius: 1
   targetPoint: {fileID: 0}
+  doorManager: {fileID: 0}
 --- !u!82 &1051153089
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8544,7 +8573,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -8630,6 +8659,7 @@ MonoBehaviour:
   CloseControl: 0
   manager: {fileID: 0}
   connectedRoom: {fileID: 0}
+  doorTrigger: {fileID: 0}
 --- !u!1001 &1056705092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9387,6 +9417,7 @@ MonoBehaviour:
   audioClip: {fileID: 0}
   triggerRadius: 1
   targetPoint: {fileID: 0}
+  doorManager: {fileID: 0}
 --- !u!82 &1271278550
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9443,7 +9474,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -10514,6 +10545,7 @@ MonoBehaviour:
   audioClip: {fileID: 0}
   triggerRadius: 1
   targetPoint: {fileID: 0}
+  doorManager: {fileID: 0}
 --- !u!82 &1339388276
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10570,7 +10602,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -14425,10 +14457,10 @@ PrefabInstance:
       addedObject: {fileID: 235226882}
     - targetCorrespondingSourceObject: {fileID: 125954931226619625, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 624187483}
+      addedObject: {fileID: 624187488}
     - targetCorrespondingSourceObject: {fileID: 125954931226619625, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 624187488}
+      addedObject: {fileID: 624187493}
     - targetCorrespondingSourceObject: {fileID: 125954930997539523, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1054902603}
@@ -14729,7 +14761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5385205915926064311, guid: 71d62cb99f22dfa4c92d298a26ada7f3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.75
+      value: 1.255
       objectReference: {fileID: 0}
     - target: {fileID: 5385205915926064311, guid: 71d62cb99f22dfa4c92d298a26ada7f3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15586,7 +15618,7 @@ GameObject:
   - component: {fileID: 1522921922}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18432,6 +18464,7 @@ MonoBehaviour:
   CloseControl: 0
   manager: {fileID: 0}
   connectedRoom: {fileID: 1319573596}
+  doorTrigger: {fileID: 0}
 --- !u!1001 &1742535113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20318,7 +20351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 480340, guid: 2f1666ad9b7fdd7459a360619d6ccffd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.238
       objectReference: {fileID: 0}
     - target: {fileID: 480340, guid: 2f1666ad9b7fdd7459a360619d6ccffd, type: 3}
       propertyPath: m_LocalPosition.z

@@ -17,8 +17,14 @@ public class changePhoto : MonoBehaviour
     {
         if (targetDoor != null && targetDoor.open && !materialChanged)
         {
-            ChangeFrameMaterial();
+            StartCoroutine(ChangeFrameMaterialWithDelay(2f)); // 2초 지연 후 메테리얼 변경
         }
+    }
+
+    private IEnumerator ChangeFrameMaterialWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ChangeFrameMaterial();
     }
 
     public void ChangeFrameMaterial()
