@@ -99,7 +99,7 @@ public class playerTestD : MonoBehaviour
                 {
                     S_Door.Play();
                     doorController door = hit.collider.GetComponent<doorController>();
-                    
+
                     if (door != null)
                     {
                         door.ChangeDoorState(); // 문 상태 변경 호출
