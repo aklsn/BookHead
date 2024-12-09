@@ -53,6 +53,12 @@ public class doorController : MonoBehaviour
         }
     }
 
+    public void CloseDoor()
+    {
+        open = false; // 상태 변경
+        Debug.Log("문이 닫혔습니다.");
+    }
+
     public void ChangeDoorState()
     {
         if (CloseControl == false)
@@ -74,5 +80,20 @@ public class doorController : MonoBehaviour
         {
             connectedRoom.SetRoomObjectsState(open);
         }
+    }
+
+        public void LockDoor()
+    {
+        if (open)
+        {
+            CloseDoor(); // 문 닫기
+            CloseControl = true;
+        }
+    }
+    
+    public void UnlockDoor()
+    {
+        CloseControl = false;
+
     }
 }

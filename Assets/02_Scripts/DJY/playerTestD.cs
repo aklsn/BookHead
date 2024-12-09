@@ -126,20 +126,30 @@ public class playerTestD : MonoBehaviour
                 }
                 else if (hit.collider.CompareTag("Lp"))
                 {
+                    GameObject LP = GameObject.Find("LpTrigger");
                     LPTrigger lp = hit.collider.GetComponent<LPTrigger>();
                     if (lp != null)
                     {
+                        if (lp.IsLp)
+                        {
+                            LP.SetActive(false);
+                        }
                         lp.IsLp = false;
                     }
                 }
                 else if (hit.collider.CompareTag("Tvcontroller"))
                 {
+                    GameObject TV = GameObject.Find("TvTrigger");
                     GameObject TvNoise = GameObject.Find("TvNoise");
                     TVTrigger tv = hit.collider.GetComponent<TVTrigger>();
                     if (tv != null)
                     {
+                        if (tv.IsTv)
+                        {
+                            TvNoise.SetActive(false);
+                            TV.SetActive(false);
+                        }
                         tv.IsTv = false;
-                        TvNoise.SetActive(false);
                     }
                 }
             }
@@ -260,5 +270,13 @@ public class playerTestD : MonoBehaviour
                 }
             }
         }
+        if (other.CompareTag("CloseDoor"))
+        {
+            GameObject doorlook = GameObject.Find("doorLockManager");
+            LockableDoorManager1 dr = doorlook.GetComponent<LockableDoorManager1>();
+
+            dr.LockDoor();
+        }
     }
 }
+
