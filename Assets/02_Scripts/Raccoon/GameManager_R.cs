@@ -6,13 +6,9 @@ public class GameManager_R : MonoBehaviour
 {
     public Transform player;
 
-
     public GameObject bed;
 
     public int event_count;
-
-
-
 
     void Start()
     {

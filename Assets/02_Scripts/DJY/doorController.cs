@@ -12,7 +12,7 @@ public class doorController : MonoBehaviour
     public roomControl connectedRoom1;
     public roomControl connectedRoom2;
 
-    private bool open = false; // 문 상태
+    public bool open = false; // 문 상태
     private bool isLocked = false;
 
     public bool EventOn = false;
@@ -33,6 +33,12 @@ public class doorController : MonoBehaviour
         {
             Quaternion targetRotation = Quaternion.Euler(0, doorOpenAngle, 0);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * smooth);
+            var photoChanger = GetComponent<changePhoto>();
+                if (photoChanger != null)
+                {
+                    photoChanger.ChangeFrameMaterial();
+                }
+
             if (EventOn == true)
             {
                 manager.GetComponent<GameManager_R>().event_count--;
