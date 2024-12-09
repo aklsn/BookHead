@@ -126,20 +126,24 @@ public class playerTestD : MonoBehaviour
                 }
                 else if (hit.collider.CompareTag("Lp"))
                 {
+                    GameObject LP = GameObject.Find("LpTrigger");
                     LPTrigger lp = hit.collider.GetComponent<LPTrigger>();
                     if (lp != null)
                     {
                         lp.IsLp = false;
+                        LP.SetActive(false);
                     }
                 }
                 else if (hit.collider.CompareTag("Tvcontroller"))
                 {
+                    GameObject TV = GameObject.Find("TvTrigger");
                     GameObject TvNoise = GameObject.Find("TvNoise");
                     TVTrigger tv = hit.collider.GetComponent<TVTrigger>();
                     if (tv != null)
                     {
                         tv.IsTv = false;
                         TvNoise.SetActive(false);
+                        TV.SetActive(false);
                     }
                 }
             }
