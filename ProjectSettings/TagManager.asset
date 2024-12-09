@@ -8,6 +8,8 @@ TagManager:
   - Door
   - Bed
   - Light
+  - Insect
+  - subcam
   layers:
   - Default
   - TransparentFX
