@@ -21,7 +21,6 @@ public class LastEvent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /*
         if (globalVolume != null && globalVolume.profile != null)
         {
             if (globalVolume.profile.TryGet(out vignette))
@@ -37,7 +36,6 @@ public class LastEvent : MonoBehaviour
         {
             Debug.LogError("Global Volume 또는 Volume Profile이 설정되지 않았습니다.");
         }
-        */
         initialPosition = playerCamera.transform.position;
     }
 

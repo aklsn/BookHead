@@ -17,16 +17,13 @@ public class DoorEventCheck : MonoBehaviour
 
     bool EventOn = false;
 
+    public bool IsRaccoonScene = false;
+
     private bool previousDoorMirrorState = false; 
     private bool previousDoorScuttleState = false;
     private bool previousDoorRoom1State = false;
     [System.NonSerialized]
     public bool mannequinEventEnd = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

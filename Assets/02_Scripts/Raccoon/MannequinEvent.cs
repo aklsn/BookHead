@@ -11,6 +11,7 @@ public class MannequinEvent : MonoBehaviour
     public GameObject[] Mannequin;
     public GameObject mainMannequin;
     public GameObject blackoutPanel;
+    public GameObject player;
     private int sequence = 0;
     private int final_sequence = 3;
 
@@ -26,7 +27,6 @@ public class MannequinEvent : MonoBehaviour
     public float mannequin_RotateDelay = 2f;
     Transform main_head = null;
 
-    public GameObject player;
     public float distanceInFront = 2.0f;
     public GameObject ControlDoor;
 
@@ -39,6 +39,7 @@ public class MannequinEvent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MannequinAudioSource = GetComponent<AudioSource>();
         currentIntensity = _light.intensity;
         originalIntensity = currentIntensity;
         _light.intensity = 0.0f;
@@ -75,6 +76,7 @@ public class MannequinEvent : MonoBehaviour
 
     public void mannequinEvent()
     {
+        player.GetComponent<playerTestD>().MoveControl = true;
         Destroy(WallDestroy);
         StartCoroutine(HeadRotationEvent());
     }
@@ -111,6 +113,7 @@ public class MannequinEvent : MonoBehaviour
             }
 
             blackoutPanel.SetActive(true);
+            StartCoroutine(StopAudioWithDelay(0.5f));
             yield return new WaitForSeconds(mannequin_revealDelay);
 
             if (mainMannequin != null)
@@ -156,7 +159,6 @@ public class MannequinEvent : MonoBehaviour
             if (sequence == final_sequence)
             {
                 blackoutPanel.SetActive(true);
-                StartCoroutine(StopAudioWithDelay(.5f));
                 Destroy(Mannequin[sequence - 1]);
                 yield return new WaitForSeconds(mannequin_revealDelay);
                 blackoutPanel.SetActive(false);
@@ -165,13 +167,12 @@ public class MannequinEvent : MonoBehaviour
 
         ControlDoor.GetComponent<doorController>().CloseControl = false;
         gameObject.GetComponent<DoorEventCheck>().mannequinEventEnd = true;
+        player.GetComponent<playerTestD>().MoveControl = false;
     }
 
     private IEnumerator StopAudioWithDelay(float delay)
     {
-        MannequinAudioSource.clip = MannequinAudioClip;
-        isAudioPlay = true;
-        MannequinAudioSource.Play();
+        MannequinAudioSource.PlayOneShot(MannequinAudioClip);
         yield return new WaitForSeconds(delay);
         MannequinAudioSource.Stop();
     }
