@@ -82,7 +82,7 @@ public class playerTestD : MonoBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        float maxDistance = 1f; // 레이캐스트 최대 거리 (1미터)
+        float maxDistance = 1.5f; // 레이캐스트 최대 거리 (1미터)
 
         if (Physics.Raycast(ray, out hit, maxDistance))
         {
@@ -191,8 +191,8 @@ public class playerTestD : MonoBehaviour
         float targetMouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * 0.01f;
 
         // SmoothDamp
-        currentMouseX = Mathf.SmoothDamp(currentMouseX, targetMouseX, ref mouseXVelocity, smoothTime);
-        currentMouseY = Mathf.SmoothDamp(currentMouseY, targetMouseY, ref mouseYVelocity, smoothTime);
+        currentMouseX = Mathf.Lerp(currentMouseX, targetMouseX, smoothTime);
+        currentMouseY = Mathf.Lerp(currentMouseY, targetMouseY, smoothTime);
 
         _xRotation -= currentMouseY;
         _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);

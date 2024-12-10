@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class LPTrigger : MonoBehaviour
 {
+    public doorController doorController;
     public AudioSource sound1; // 연결된 
     public Transform player;    //Player위치 정보값
     public bool IsLp; // 사운드 재생 상태 플래그
