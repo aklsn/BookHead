@@ -48,7 +48,6 @@ public class soundPlay : MonoBehaviour
         {
             audioSource.Play();
             audioPlayed = true;
-            Debug.Log("오디오 재생됨: " + audioClip.name);
             doorManager.UnlockDoor();
         }
     }

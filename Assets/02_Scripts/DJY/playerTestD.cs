@@ -281,12 +281,35 @@ public class playerTestD : MonoBehaviour
                 }
             }
         }
-        if (other.CompareTag("CloseDoor"))
+        if (other.gameObject.name == "SoundTriggerPoint1")
         {
             GameObject doorlook = GameObject.Find("doorLockManager");
             LockableDoorManager1 dr = doorlook.GetComponent<LockableDoorManager1>();
 
             dr.LockDoor();
+            GameObject doorTrigger = GameObject.Find("SoundTriggerPoint1");
+            doorTrigger.SetActive(false);
+        }
+
+        if (other.gameObject.name == "SoundTriggerPoint2")
+        {
+            GameObject doorlook2 = GameObject.Find("doorLockManager2");
+            LockableDoorManager1 dr = doorlook2.GetComponent<LockableDoorManager1>();
+
+            dr.LockDoor();
+            GameObject doorTrigger = GameObject.Find("SoundTriggerPoint2");
+            doorTrigger.SetActive(false);
+        }
+
+        if (other.gameObject.name == "Monster_Trigger")
+        {
+            GameObject doorlook3 = GameObject.Find("doorLockManager3");
+            LockableDoorManager1 dr = doorlook3.GetComponent<LockableDoorManager1>();
+
+            dr.LockDoor();
+            GameObject doorTrigger = GameObject.Find("Monster_Trigger");
+            doorTrigger.SetActive(false);
+            dr.UnlockDoor();
         }
     }
 }
