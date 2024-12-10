@@ -28,7 +28,6 @@ public class Room1Event : MonoBehaviour
 
     public void Room1_Event()
     {
-        Debug.Log("ตส");
         ChangeImage.GetComponent<MeshRenderer>().material = Image;
         Destroy(Delete_Mannequin);
         StartCoroutine(StopAudioWithDelay(.3f));

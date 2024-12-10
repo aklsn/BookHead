@@ -34,6 +34,8 @@ public class MannequinEvent : MonoBehaviour
     public AudioClip MannequinAudioClip;
     private bool isAudioPlay = false;
 
+    public GameObject WallDestroy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +75,7 @@ public class MannequinEvent : MonoBehaviour
 
     public void mannequinEvent()
     {
+        Destroy(WallDestroy);
         StartCoroutine(HeadRotationEvent());
     }
 

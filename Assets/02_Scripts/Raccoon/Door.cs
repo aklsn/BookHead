@@ -30,7 +30,6 @@ public class Door : MonoBehaviour
             transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * smoot);
             if (EventOn == true)
             {
-                manager.GetComponent<GameManager_R>().event_count--;
                 manager.GetComponent<MannequinEvent>().mannequinEvent();
                 EventOn = false;
             }

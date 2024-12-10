@@ -81,7 +81,6 @@ public class DoorEventCheck : MonoBehaviour
     {
         if (e.GetComponent<doorController>().EventOn == false)
         {
-            manager.GetComponent<GameManager_R>().event_count--;
             e.GetComponent<doorController>().EventOn = true;
         }
     }
