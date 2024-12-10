@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
+using Image = UnityEngine.UI.Image;
 
 public class playerTestD : MonoBehaviour
 {
@@ -131,6 +133,7 @@ public class playerTestD : MonoBehaviour
                     Transform ChilDoor = DoorControl.transform.Find("Interior_Door");
                     doorController Door = ChilDoor.GetComponent<doorController>();
                     LPTrigger lp = hit.collider.GetComponent<LPTrigger>();
+                    
                     if (lp != null)
                     {
                         if (lp.IsLp)
