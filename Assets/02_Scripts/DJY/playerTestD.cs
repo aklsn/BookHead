@@ -143,7 +143,6 @@ public class playerTestD : MonoBehaviour
                             LP.SetActive(false);
                         }
                         lp.IsDone = true;
-                        Debug.Log(lp.IsDone);
                         lp.IsLp = false;
                     }
                 }
@@ -159,6 +158,8 @@ public class playerTestD : MonoBehaviour
                             TvNoise.SetActive(false);
                             TV.SetActive(false);
                         }
+
+                        tv.IsDone = true;
                         tv.IsTv = false;
                     }
                 }
