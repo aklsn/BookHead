@@ -38,18 +38,6 @@ public class changePhoto : MonoBehaviour
                 materialChanged = true;
                 Debug.Log("액자의 이미지가 변경되었습니다.");
             }
-            else
-            {
-                Debug.LogWarning("Frame Object에 Renderer가 없습니다.");
-            }
-        }
-        else if (materialChanged)
-        {
-            Debug.Log("이미 액자의 이미지가 변경되었습니다.");
-        }
-        else
-        {
-            Debug.LogWarning("Frame Object 또는 New Material이 설정되지 않았습니다.");
         }
     }
 }
