@@ -42,8 +42,11 @@ public class playerTestD : MonoBehaviour
     private bool isMoving = false;
     private bool isfootAudioPlay = false;
 
+    //이벤트를 통한 이동 제한(Only Raccoon Scene)
+    [System.NonSerialized]
+    public bool MoveControl = false;
 
-    public AudioSource S_Door;
+    //public AudioSource S_Door;
 
     private void Start()
     {
@@ -79,7 +82,10 @@ public class playerTestD : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         Vector3 mov = new Vector3(h, 0, v);
-        this.transform.Translate(mov * Time.deltaTime * playerSpeed);
+        if (MoveControl == false)
+        { 
+            this.transform.Translate(mov * Time.deltaTime * playerSpeed);
+        }
         _inputDirection = new Vector3(h, 0.0f, v).normalized;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -176,9 +182,12 @@ public class playerTestD : MonoBehaviour
         Vector3 moveDirection = transform.TransformDirection(_inputDirection);
 
         Vector3 move = moveDirection * playerSpeed * Time.deltaTime;
-        _rb.MovePosition(transform.position + move);
+        if (MoveControl == false)
+        {
+            _rb.MovePosition(transform.position + move);
 
-        HandleCameraBounce();
+            HandleCameraBounce();
+        }
     }
 
     private void HandleCameraBounce()

@@ -25,7 +25,8 @@ public class doorController : MonoBehaviour
     public AudioSource DoorSource;
     public AudioClip OpenDoor;
     public AudioClip ClosedDoor;
-    
+    public AudioClip CantOpenDoor;
+
     private bool _previousState = false;
 
     void Update()
@@ -79,7 +80,11 @@ public class doorController : MonoBehaviour
         {
             open = !open; // 문 상태 변경
         }
-
+        else
+        {
+            DoorSource.clip = CantOpenDoor;
+            DoorSource.Play();
+        }
         Debug.Log(open ? "문이 열렸습니다." : "문이 닫혔습니다.");
 
         if (isLocked)

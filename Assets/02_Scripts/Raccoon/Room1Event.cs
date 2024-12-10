@@ -11,13 +11,17 @@ public class Room1Event : MonoBehaviour
     public Material Image;
     private bool isAudioPlay = false;
 
-    [System.NonSerialized]
     public bool Room1EventActive = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        // 디버그용 로그 추가
+        if (Room1AudioSource == null)
+            Debug.LogWarning("AudioSource가 할당되지 않았습니다!");
+
+        if (Room1AudioClip == null)
+            Debug.LogWarning("AudioClip이 할당되지 않았습니다!");
     }
 
     // Update is called once per frame
@@ -28,17 +32,39 @@ public class Room1Event : MonoBehaviour
 
     public void Room1_Event()
     {
-        ChangeImage.GetComponent<MeshRenderer>().material = Image;
-        Destroy(Delete_Mannequin);
-        StartCoroutine(StopAudioWithDelay(2.0f));
-    }
+        // 널 체크 추가
+        if (ChangeImage != null)
+        {
+            MeshRenderer renderer = ChangeImage.GetComponent<MeshRenderer>();
+            if (renderer != null && Image != null)
+            {
+                renderer.material = Image;
+            }
+        }
 
-    private IEnumerator StopAudioWithDelay(float delay)
-    {
+        if (Delete_Mannequin != null)
+        {
+            Destroy(Delete_Mannequin);
+        }
+
+        if (Room1AudioClip == null)
+        {
+            Debug.LogError("Room1AudioClip이 null입니다!");
+            return;
+        }
+
+        // 클립 변경
         Room1AudioSource.clip = Room1AudioClip;
-        isAudioPlay = true;
-        Room1AudioSource.Play();
-        yield return new WaitForSeconds(delay);
-        Room1AudioSource.Stop();
+
+        if (Room1AudioSource != null && Room1AudioClip != null)
+        {
+            if (Room1AudioSource.isPlaying)
+                Room1AudioSource.Stop();
+            Room1AudioSource.PlayOneShot(Room1AudioClip);
+        }
+        else
+        {
+            Debug.LogWarning("오디오 소스나 클립이 할당되지 않았습니다!");
+        }
     }
 }

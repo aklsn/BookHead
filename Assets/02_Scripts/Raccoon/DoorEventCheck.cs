@@ -17,36 +17,13 @@ public class DoorEventCheck : MonoBehaviour
 
     bool EventOn = false;
 
+    public bool IsRaccoonScene = false;
+
     private bool previousDoorMirrorState = false; 
     private bool previousDoorScuttleState = false;
     private bool previousDoorRoom1State = false;
     [System.NonSerialized]
     public bool mannequinEventEnd = false;
-    // Start is called before the first frame update
-
-    public AudioSource DoorAudio;
-    
-    public AudioClip LockDoorAudioClip;
-    public AudioClip OpenDoorAudioClip;
-    public AudioClip CloseDoorAudioClip;
-
-    public void OpenLockDoorPlay()
-    {
-        DoorAudio.clip = LockDoorAudioClip;
-        DoorAudio.Play();
-    }
-
-    public void OpenDoorPlay()
-    {
-        DoorAudio.clip = OpenDoorAudioClip;
-        DoorAudio.Play();
-    }
-
-    public void CloseDoorPlay()
-    {
-        DoorAudio.clip = CloseDoorAudioClip;
-        DoorAudio.Play();
-    }
 
     // Update is called once per frame
     void Update()
@@ -90,7 +67,6 @@ public class DoorEventCheck : MonoBehaviour
             {
                 if (currentDoorRoom1State == true)
                 {
-                    gameObject.GetComponent<DoorEventCheck>().OpenLockDoorPlay();
                     EventActive(doorRoom1);
                     manager.GetComponent<Room1Event>().Room1EventActive = true;
                 }

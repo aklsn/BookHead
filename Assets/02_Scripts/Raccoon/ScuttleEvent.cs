@@ -18,7 +18,7 @@ public class ScuttleEvent : MonoBehaviour
     public bool ScuttleEventActive = false;
     void Start()
     {
-        
+        ScuttleAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,21 +31,15 @@ public class ScuttleEvent : MonoBehaviour
             Scuttle.transform.localRotation = Quaternion.Euler(currentAngle, 0, 0);
             if (isAudioPlay == false)
             {
-                StartCoroutine(StopAudioWithDelay(2.0f));
+                if (ScuttleAudioSource.isPlaying)
+                    ScuttleAudioSource.Stop();
+                ScuttleAudioSource.PlayOneShot(ScuttleAudioClip);
+                isAudioPlay = true;
             }
         }
         else
         {
             Mannequin.SetActive(false);
         }
-    }
-
-    private IEnumerator StopAudioWithDelay(float delay)
-    {
-        ScuttleAudioSource.clip = ScuttleAudioClip;
-        isAudioPlay = true;
-        ScuttleAudioSource.Play();
-        yield return new WaitForSeconds(delay);
-        ScuttleAudioSource.Stop();
     }
 }
