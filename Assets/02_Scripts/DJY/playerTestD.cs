@@ -142,6 +142,8 @@ public class playerTestD : MonoBehaviour
                             Door.open = true;
                             LP.SetActive(false);
                         }
+                        lp.IsDone = true;
+                        Debug.Log(lp.IsDone);
                         lp.IsLp = false;
                     }
                 }
