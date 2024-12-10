@@ -24,14 +24,28 @@ public class DoorEventCheck : MonoBehaviour
     public bool mannequinEventEnd = false;
     // Start is called before the first frame update
 
-    public AudioSource LockDoorAudio;
-    public AudioClip LockDoorAudioClip;
-
+    public AudioSource DoorAudio;
     
+    public AudioClip LockDoorAudioClip;
+    public AudioClip OpenDoorAudioClip;
+    public AudioClip CloseDoorAudioClip;
+
     public void OpenLockDoorPlay()
     {
-        LockDoorAudio.clip = LockDoorAudioClip;
-        LockDoorAudio.Play();
+        DoorAudio.clip = LockDoorAudioClip;
+        DoorAudio.Play();
+    }
+
+    public void OpenDoorPlay()
+    {
+        DoorAudio.clip = OpenDoorAudioClip;
+        DoorAudio.Play();
+    }
+
+    public void CloseDoorPlay()
+    {
+        DoorAudio.clip = CloseDoorAudioClip;
+        DoorAudio.Play();
     }
 
     // Update is called once per frame

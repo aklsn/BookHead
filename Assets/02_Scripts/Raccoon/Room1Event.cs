@@ -30,7 +30,7 @@ public class Room1Event : MonoBehaviour
     {
         ChangeImage.GetComponent<MeshRenderer>().material = Image;
         Destroy(Delete_Mannequin);
-        StartCoroutine(StopAudioWithDelay(.3f));
+        StartCoroutine(StopAudioWithDelay(2.0f));
     }
 
     private IEnumerator StopAudioWithDelay(float delay)

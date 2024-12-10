@@ -31,7 +31,7 @@ public class ScuttleEvent : MonoBehaviour
             Scuttle.transform.localRotation = Quaternion.Euler(currentAngle, 0, 0);
             if (isAudioPlay == false)
             {
-                StartCoroutine(StopAudioWithDelay(.3f));
+                StartCoroutine(StopAudioWithDelay(2.0f));
             }
         }
         else
