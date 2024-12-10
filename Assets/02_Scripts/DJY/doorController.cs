@@ -21,6 +21,13 @@ public class doorController : MonoBehaviour
     [Header("Room Settings")]
     public roomControl connectedRoom; // 연결된 방 컨트롤러
 
+
+    public AudioSource DoorSource;
+    public AudioClip OpenDoor;
+    public AudioClip ClosedDoor;
+    
+    private bool _previousState = false;
+
     void Update()
     {
         if (CloseControl == true) // true 면 문 닫히게
@@ -42,6 +49,21 @@ public class doorController : MonoBehaviour
         {
             Quaternion targetRotation = Quaternion.Euler(0, doorCloseAngle, 0);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * smooth);
+        }
+        
+        if (_previousState != open)
+        {
+            PlayDoorSound(open);
+            _previousState = open; // 상태 업데이트
+        }
+    }
+    
+    void PlayDoorSound(bool isOpen)
+    {
+        if (DoorSource != null)
+        {
+            DoorSource.clip = isOpen ? OpenDoor : ClosedDoor;
+            DoorSource.Play();
         }
     }
 
