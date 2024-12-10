@@ -6662,7 +6662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scarysound: {fileID: 786500634}
-  LP: {fileID: 602890139}
+  lpTrigger: {fileID: 602890140}
   panSpeed: 1
 --- !u!1001 &798778478
 PrefabInstance:
