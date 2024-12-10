@@ -127,11 +127,16 @@ public class playerTestD : MonoBehaviour
                 else if (hit.collider.CompareTag("Lp"))
                 {
                     GameObject LP = GameObject.Find("LpTrigger");
+                    GameObject DoorControl = GameObject.Find("Door_2B (3)");
+                    Transform ChilDoor = DoorControl.transform.Find("Interior_Door");
+                    doorController Door = ChilDoor.GetComponent<doorController>();
                     LPTrigger lp = hit.collider.GetComponent<LPTrigger>();
                     if (lp != null)
                     {
                         if (lp.IsLp)
                         {
+                            Door.CloseControl = false;
+                            Door.open = true;
                             LP.SetActive(false);
                         }
                         lp.IsLp = false;
