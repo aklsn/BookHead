@@ -300,6 +300,17 @@ public class playerTestD : MonoBehaviour
             GameObject doorTrigger = GameObject.Find("SoundTriggerPoint2");
             doorTrigger.SetActive(false);
         }
+
+        if (other.gameObject.name == "Monster_Trigger")
+        {
+            GameObject doorlook3 = GameObject.Find("doorLockManager3");
+            LockableDoorManager1 dr = doorlook3.GetComponent<LockableDoorManager1>();
+
+            dr.LockDoor();
+            GameObject doorTrigger = GameObject.Find("Monster_Trigger");
+            doorTrigger.SetActive(false);
+            dr.UnlockDoor();
+        }
     }
 }
 
