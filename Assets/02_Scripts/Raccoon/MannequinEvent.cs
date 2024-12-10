@@ -11,6 +11,7 @@ public class MannequinEvent : MonoBehaviour
     public GameObject[] Mannequin;
     public GameObject mainMannequin;
     public GameObject blackoutPanel;
+    public GameObject player;
     private int sequence = 0;
     private int final_sequence = 3;
 
@@ -26,7 +27,7 @@ public class MannequinEvent : MonoBehaviour
     public float mannequin_RotateDelay = 2f;
     Transform main_head = null;
 
-    public GameObject player;
+    public Rigidbody playerRb;
     public float distanceInFront = 2.0f;
     public GameObject ControlDoor;
 
@@ -77,6 +78,8 @@ public class MannequinEvent : MonoBehaviour
     {
         Destroy(WallDestroy);
         StartCoroutine(HeadRotationEvent());
+        //playerRb.constraints = RigidbodyConstraints.FreezePositionX;
+        //playerRb.constraints = RigidbodyConstraints.FreezePositionZ;
     }
 
     IEnumerator HeadRotationEvent()
@@ -165,6 +168,8 @@ public class MannequinEvent : MonoBehaviour
 
         ControlDoor.GetComponent<doorController>().CloseControl = false;
         gameObject.GetComponent<DoorEventCheck>().mannequinEventEnd = true;
+        //playerRb.constraints = RigidbodyConstraints.None;
+        gameObject.GetComponent<DoorEventCheck>().OpenLockDoorPlay();
     }
 
     private IEnumerator StopAudioWithDelay(float delay)

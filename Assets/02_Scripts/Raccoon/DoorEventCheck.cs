@@ -23,9 +23,15 @@ public class DoorEventCheck : MonoBehaviour
     [System.NonSerialized]
     public bool mannequinEventEnd = false;
     // Start is called before the first frame update
-    void Start()
+
+    public AudioSource LockDoorAudio;
+    public AudioClip LockDoorAudioClip;
+
+    
+    public void OpenLockDoorPlay()
     {
-        
+        LockDoorAudio.clip = LockDoorAudioClip;
+        LockDoorAudio.Play();
     }
 
     // Update is called once per frame
@@ -70,6 +76,7 @@ public class DoorEventCheck : MonoBehaviour
             {
                 if (currentDoorRoom1State == true)
                 {
+                    gameObject.GetComponent<DoorEventCheck>().OpenLockDoorPlay();
                     EventActive(doorRoom1);
                     manager.GetComponent<Room1Event>().Room1EventActive = true;
                 }

@@ -20,7 +20,6 @@ public class MirrorEvent : MonoBehaviour
     private bool isLookingAtMirror = false; 
     private bool isMonsterVisible = false;
     private bool isEventTriggered = false;
-
     void Start()
     {
         isMonsterVisible = false;

@@ -73,19 +73,4 @@ public class doorController : MonoBehaviour
             connectedRoom.SetRoomObjectsState(open);
         }
     }
-
-        public void LockDoor()
-    {
-        if (open)
-        {
-            CloseDoor(); // 문 닫기
-            CloseControl = true;
-        }
-    }
-    
-    public void UnlockDoor()
-    {
-        CloseControl = false;
-
-    }
 }
