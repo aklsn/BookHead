@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
+using Image = UnityEngine.UI.Image;
 
 public class playerTestD : MonoBehaviour
 {
@@ -127,13 +129,20 @@ public class playerTestD : MonoBehaviour
                 else if (hit.collider.CompareTag("Lp"))
                 {
                     GameObject LP = GameObject.Find("LpTrigger");
+                    GameObject DoorControl = GameObject.Find("Door_2B (3)");
+                    Transform ChilDoor = DoorControl.transform.Find("Interior_Door");
+                    doorController Door = ChilDoor.GetComponent<doorController>();
                     LPTrigger lp = hit.collider.GetComponent<LPTrigger>();
+                    
                     if (lp != null)
                     {
                         if (lp.IsLp)
                         {
+                            Door.CloseControl = false;
+                            Door.open = true;
                             LP.SetActive(false);
                         }
+                        lp.IsDone = true;
                         lp.IsLp = false;
                     }
                 }
@@ -149,6 +158,8 @@ public class playerTestD : MonoBehaviour
                             TvNoise.SetActive(false);
                             TV.SetActive(false);
                         }
+
+                        tv.IsDone = true;
                         tv.IsTv = false;
                     }
                 }
@@ -270,12 +281,24 @@ public class playerTestD : MonoBehaviour
                 }
             }
         }
-        if (other.CompareTag("CloseDoor"))
+        if (other.gameObject.name == "SoundTriggerPoint1")
         {
             GameObject doorlook = GameObject.Find("doorLockManager");
             LockableDoorManager1 dr = doorlook.GetComponent<LockableDoorManager1>();
 
             dr.LockDoor();
+            GameObject doorTrigger = GameObject.Find("SoundTriggerPoint1");
+            doorTrigger.SetActive(false);
+        }
+
+        if (other.gameObject.name == "SoundTriggerPoint2")
+        {
+            GameObject doorlook2 = GameObject.Find("doorLockManager2");
+            LockableDoorManager1 dr = doorlook2.GetComponent<LockableDoorManager1>();
+
+            dr.LockDoor();
+            GameObject doorTrigger = GameObject.Find("SoundTriggerPoint2");
+            doorTrigger.SetActive(false);
         }
     }
 }

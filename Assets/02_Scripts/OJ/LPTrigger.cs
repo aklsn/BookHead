@@ -6,9 +6,11 @@ using UnityEngine;
 public class LPTrigger : MonoBehaviour
 {
     public doorController doorController;
+    public GhostManager ghostManager;
     public AudioSource sound1; // 연결된 
     public Transform player;    //Player위치 정보값
     public bool IsLp; // 사운드 재생 상태 플래그
+    public bool IsDone;
     public float minDistance = 1f; // 최소 거리
     public float maxDistance = 20f; // 최대 거리
     private float minPitch = 1f; // 최소 피치 값
@@ -17,6 +19,7 @@ public class LPTrigger : MonoBehaviour
     private void Start()
     {
         IsLp = false; // 초기값 설정
+        IsDone = false;
     }
 
     private void Update()
@@ -38,6 +41,12 @@ public class LPTrigger : MonoBehaviour
 
             // AudioSource의 피치 값을 업데이트
             sound1.pitch = pitch; 
+        }
+
+        if (IsDone)
+        {
+            ghostManager.ghost1.SetActive(true);
+            IsDone = false;
         }
     }
 }
