@@ -1723,7 +1723,7 @@ MonoBehaviour:
   DoorSource: {fileID: 235226882}
   OpenDoor: {fileID: 8300000, guid: 6f249dbd30221ae4cb671c44ee856189, type: 3}
   ClosedDoor: {fileID: 8300000, guid: c0262ed0ee086114b836f1c7a184cf2e, type: 3}
-  CantOpenDoor: {fileID: 0}
+  CantOpenDoor: {fileID: 8300000, guid: 541bd3d72000e0f4a937980e650fb40b, type: 3}
 --- !u!82 &235226882
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8631,7 +8631,7 @@ MonoBehaviour:
   DoorSource: {fileID: 1054902614}
   OpenDoor: {fileID: 8300000, guid: 6f249dbd30221ae4cb671c44ee856189, type: 3}
   ClosedDoor: {fileID: 8300000, guid: c0262ed0ee086114b836f1c7a184cf2e, type: 3}
-  CantOpenDoor: {fileID: 0}
+  CantOpenDoor: {fileID: 8300000, guid: 541bd3d72000e0f4a937980e650fb40b, type: 3}
 --- !u!4 &1054902609 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7473348505787391291, guid: 2f31c755d56a1f04c99079c171333c33, type: 3}
