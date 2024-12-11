@@ -2772,7 +2772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsEventOn: 0
   IsClick: 0
-  NextScene: 
+  NextScene: EndingScene
 --- !u!1001 &128339148
 PrefabInstance:
   m_ObjectHideFlags: 0

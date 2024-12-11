@@ -35,6 +35,7 @@ public class UIController_J : MonoBehaviour
     // 옵션 버튼 (옵션 패널 열기/닫기)
     void ToggleOption()
     {
+        UIPanel.SetActive(false);
         optionPanel.SetActive(!optionPanel.activeSelf);
     }
 
