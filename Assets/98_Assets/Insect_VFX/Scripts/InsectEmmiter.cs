@@ -12,9 +12,7 @@ namespace Insect_VFX
         public int numberOfEmissions = 5;
         public GameObject emissionObject;
         [Range(0.1f, 10f)]
-        public float simulationRangeX = 1f; // X축 범위
-        [Range(0.1f, 10f)]
-        public float simulationRangeZ = 1f; // Z축 범위
+        public float simulationRange = 1f;
         [Range(0.5f, 5f)]
         public float simulationHeigth = 1f;
 
@@ -311,13 +309,11 @@ namespace Insect_VFX
 
         Vector3 GetRandomPosition(Vector3 origin)
         {
-            float rangeX = simulationRangeX * 0.5f;
-            float rangeZ = simulationRangeZ * 0.5f;
-
+            float range = simulationRange * 0.5f;
             Vector3 newPos = origin + new Vector3(
-                Random.Range(-rangeX, rangeX),
-                Random.Range(-simulationHeigth * 0.5f, simulationHeigth * 0.5f),
-                Random.Range(-rangeZ, rangeZ)
+                Random.Range(-range, range),
+                Random.Range(-range, range),
+                Random.Range(-range, range)
             );
 
             Vector3 rayOrigin = newPos;
@@ -380,21 +376,16 @@ namespace Insect_VFX
         {
             debugMode = !debugMode;
         }
+
         void OnDrawGizmos()
         {
-            Gizmos.DrawWireCube(
-                transform.position,
-                new Vector3(simulationRangeX, simulationHeigth, simulationRangeZ) // 직사각형 크기
-            );
+            Gizmos.DrawWireCube(transform.position, new Vector3(simulationRange, simulationHeigth, simulationRange));
 
             if (Physics.Raycast(transform.position + (Vector3.up * (simulationHeigth * 0.5f)), Vector3.down, out RaycastHit hit, simulationHeigth, surface_LayerMask))
             {
                 Gizmos.color = Color.blue;
                 Gizmos.DrawSphere(hit.point, 0.01f);
-                Gizmos.DrawWireCube(
-                    hit.point - (Vector3.up * hit.distance * 0.5f),
-                    new Vector3(simulationRangeX, hit.distance, simulationRangeZ) // 직사각형 크기
-                );
+                Gizmos.DrawWireCube(hit.point - (Vector3.up * hit.distance * 0.5f), new Vector3(simulationRange, hit.distance, simulationRange));
             }
 
             if (!debugMode)
