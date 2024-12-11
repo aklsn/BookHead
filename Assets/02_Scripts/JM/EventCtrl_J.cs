@@ -37,6 +37,9 @@ public class EventCtrl_J : MonoBehaviour
     private Vector3 newTargetPosition;     // 새로운 이동 목표 위치
     private bool isNewMoving = false;      // 새로운 이동 중인지 여부
 
+    public GameObject backTrigger;
+    public Vector3 playerTargetPosition;
+    private bool isTargetObjectMoved = false;
     private void Start()
     {
         if (triggerObject == null)
@@ -82,6 +85,10 @@ public class EventCtrl_J : MonoBehaviour
 
     private void Update()
     {
+        if (!isTargetObjectMoved)
+        {
+            CheckBackTriggerCollision();
+        }
         // 기존 이동 로직
         if (isMoving)
         {
@@ -104,7 +111,38 @@ public class EventCtrl_J : MonoBehaviour
             HandleTrigger(downTriggerObject, ref newEventTriggered, StartMovingNewTargetObject);
         }
     }
+    private void CheckBackTriggerCollision()
+    {
+        Collider[] colliders = Physics.OverlapBox(
+            backTrigger.transform.position,
+            backTrigger.GetComponent<Collider>().bounds.extents,
+            backTrigger.transform.rotation
+        );
 
+        foreach (Collider col in colliders)
+        {
+            if (col.CompareTag("Player"))
+            {
+                Debug.Log("BackTrigger 충돌 감지! 플레이어를 지정된 위치로 이동합니다.");
+                MovePlayerToTargetPosition(col.gameObject);
+                break;
+            }
+        }
+    }
+    private void MovePlayerToTargetPosition(GameObject player)
+    {
+        CharacterController controller = player.GetComponent<CharacterController>();
+        if (controller != null)
+        {
+            controller.enabled = false; // 이동 전 CharacterController 비활성화
+            player.transform.position = playerTargetPosition; // 플레이어 위치 이동
+            controller.enabled = true; // 이동 후 CharacterController 활성화
+        }
+        else
+        {
+            player.transform.position = playerTargetPosition; // CharacterController가 없을 경우 직접 이동
+        }
+    }
     private void HandleTrigger(GameObject trigger, ref bool triggered, System.Action action)
     {
         Collider[] colliders = Physics.OverlapBox(
@@ -118,6 +156,7 @@ public class EventCtrl_J : MonoBehaviour
             if (col.CompareTag("Player"))
             {
                 Debug.Log($"플레이어와 {trigger.name} 충돌 감지!");
+                isTargetObjectMoved= true;
                 action.Invoke();
                 triggered = true;
                 break;

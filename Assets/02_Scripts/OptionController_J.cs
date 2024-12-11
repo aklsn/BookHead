@@ -58,11 +58,12 @@ public class OptionController_J : MonoBehaviour
         soundSlider.maxValue = 100;
         soundSlider.value = GameManager_J.Instance.masterVolume * 100;
 
-        sensitivitySlider.minValue = 10;
         sensitivitySlider.maxValue = 100;
+        sensitivitySlider.minValue = 10;
         sensitivitySlider.value = GameManager_J.Instance.mouseSensitivity * 100;
 
         resolutionDropdown.options.Clear();
+        resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("2560x1600"));
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("1920x1080"));
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("1280x780"));
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("720x480"));
@@ -161,13 +162,17 @@ public class OptionController_J : MonoBehaviour
         switch (resolutionDropdown.value)
         {
             case 0:
-                Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
+                Screen.SetResolution(2560, 1600, FullScreenMode.FullScreenWindow);
                 break;
             case 1:
-                Screen.SetResolution(1280, 780, FullScreenMode.Windowed);
+                Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow);
+                
                 break;
             case 2:
-                Screen.SetResolution(720, 480, FullScreenMode.Windowed);
+                Screen.SetResolution(1280, 780, FullScreenMode.FullScreenWindow);
+                break;
+            case 3:
+                Screen.SetResolution(720, 480, FullScreenMode.FullScreenWindow);
                 break;
         }
 

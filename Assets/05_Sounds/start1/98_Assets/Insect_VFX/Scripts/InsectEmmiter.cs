@@ -448,7 +448,7 @@ namespace Insect_VFX
         Cockrach,
         Spider
     }
-
+#if UNITY_EDITOR
     [CustomEditor(typeof(InsectEmitter))]
     public class InsectEmitterEditor : Editor
     {
@@ -501,4 +501,5 @@ namespace Insect_VFX
             GUI.enabled = true;
         }
     }
+#endif
 }

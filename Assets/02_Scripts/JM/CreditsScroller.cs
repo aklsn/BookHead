@@ -20,8 +20,11 @@ public class CreditsScroller : MonoBehaviour
     private Vector3 cockroachStartPosition; // Cockroach의 시작 위치
     private Vector3 cockroachTargetPosition; // Cockroach의 목표 위치
 
+    AudioSource audioSource;
+
     private void Start()
     {
+        audioSource = Cockroach.GetComponent<AudioSource>();
         if (creditsText == null)
         {
             Debug.LogError("Credits Text가 설정되지 않았습니다.");
@@ -42,7 +45,7 @@ public class CreditsScroller : MonoBehaviour
         Invoke(nameof(StartCockroachMovement), delay);
 
         startPositionY = creditsText.anchoredPosition.y;
-        targetPositionY = float.MaxValue;
+        targetPositionY = 1115f;
 
         StartCoroutine(StartScrolling());
     }
@@ -57,12 +60,19 @@ public class CreditsScroller : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("크레딧 스크롤 완료");
+        QuitGame();
     }
-
+    private void QuitGame()
+    {
+        Application.Quit();
+    }
     private void StartCockroachMovement()
     {
         isMoving = true;
+        if (audioSource != null) {
+            audioSource.Play();
+
+        }
     }
 
     private void Update()
@@ -76,14 +86,12 @@ public class CreditsScroller : MonoBehaviour
     private void MoveCockroach()
     {
         if (Cockroach == null) return;
-
         // Cockroach를 목표 위치로 이동
         Cockroach.transform.position = Vector3.MoveTowards(
             Cockroach.transform.position,
             cockroachTargetPosition,
             moveSpeed * Time.deltaTime
         );
-
         // 목표 위치에 도달하면 이동 중지 및 Cockroach 위치 초기화
         if (Vector3.Distance(Cockroach.transform.position, cockroachTargetPosition) < 0.01f)
         {
