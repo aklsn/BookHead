@@ -324,7 +324,7 @@ public class playerTestD : MonoBehaviour
         dr.LockDoor();
 
         // 7초 대기
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(8);
 
         GameObject doorTrigger = GameObject.Find("Monster_Trigger");
         doorTrigger.SetActive(false);
