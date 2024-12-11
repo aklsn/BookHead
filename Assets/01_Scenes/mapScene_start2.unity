@@ -8,13 +8,13 @@ OcclusionCullingSettings:
     smallestOccluder: 3
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 159ee9515933b2c43a9985a9f9ac0fb0
-  m_OcclusionCullingData: {fileID: 36300000, guid: e6caf3ddf6996ff49be8d236768ae3be, type: 2}
+  m_SceneGUID: 78cb3b48e93a3f142bb505f333993bd1
+  m_OcclusionCullingData: {fileID: 36300000, guid: d3ade44ed15da5d4bab5a34cded7df38, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.05660379, g: 0.05660379, b: 0.05660379, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.7
@@ -1614,7 +1614,7 @@ GameObject:
   - component: {fileID: 128114658}
   m_Layer: 0
   m_Name: Bed
-  m_TagString: Untagged
+  m_TagString: Bed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4023,6 +4023,74 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8104829391657955622, guid: cda05c17060e27e4fb283a67a19c7671, type: 3}
   m_PrefabInstance: {fileID: 400031707}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &406396660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 406396663}
+  - component: {fileID: 406396662}
+  - component: {fileID: 406396661}
+  m_Layer: 0
+  m_Name: BackTrigger (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &406396661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406396660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64637b0e3492a43e79b0c46959fd9455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorController: {fileID: 1054902608}
+  PlayerTransform: {fileID: 1522921920}
+--- !u!65 &406396662
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406396660}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.473792, y: 0.14018053, z: 0.30229378}
+  m_Center: {x: 0.08259773, y: -0.42990974, z: 0.3488531}
+--- !u!4 &406396663
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406396660}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.399531, y: 0.607, z: 8.014999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &416378428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16705,7 +16773,7 @@ MonoBehaviour:
   bounceFrequency: 5.5
   cameraOffset: 0.2
   crosshair: {fileID: 2058361331}
-  defaultSprite: {fileID: 21300000, guid: 896b5c895c69e18459ee0757e13fc70e, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 74a89c4ec057e4ef2be39b0e08d2965a, type: 3}
   interactSprite: {fileID: 21300000, guid: a61f0d545a5f44d86a87b065ba012b2c, type: 3}
   footAudioSource: {fileID: 1368572750}
   footAudioClip: {fileID: 8300000, guid: b75c5c1b8bce29841a213eadb12c6a80, type: 3}
@@ -21669,7 +21737,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 25, y: 25}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2058361331
 MonoBehaviour:
@@ -22103,6 +22171,7 @@ SceneRoots:
   - {fileID: 549285361}
   - {fileID: 1993838906}
   - {fileID: 471188194}
+  - {fileID: 406396663}
   - {fileID: 1589646024}
   - {fileID: 292032035}
   - {fileID: 512104650}
