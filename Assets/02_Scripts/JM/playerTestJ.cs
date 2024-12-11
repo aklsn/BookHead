@@ -48,10 +48,6 @@ public class playerTestJ : MonoBehaviour
 
     public AudioSource S_Door;
 
-    private bool is_on = false;
-
-    public GameObject[] emitterObjects;
-
     private void Start()
     {
         currentCamera = playerCamera;
@@ -133,15 +129,14 @@ public class playerTestJ : MonoBehaviour
                         light.ChangeLightState();
                     }
                 }
-                else if (hit.collider.CompareTag("Insect")&&is_on==false) // 벌레 클릭 처리
+                else if (hit.collider.CompareTag("Insect")) // 벌레 클릭 처리
                 {
-                    is_on = true;
+                    Debug.Log("클릭됨");
                     InsectEmitter emitter = hit.collider.GetComponent<InsectEmitter>();
                     if (emitter != null)
                     {
                         StartCoroutine(SwitchToHeadCameraAndBack(emitter));
                     }
-                    StartEmitters();
                 }
             }
         }
@@ -151,17 +146,6 @@ public class playerTestJ : MonoBehaviour
         }
     }
 
-    private void StartEmitters()
-    {
-        foreach(GameObject emitterObject in emitterObjects)
-        {
-            InsectEmitter emitter = emitterObject.GetComponent<InsectEmitter>();
-            if(emitter != null)
-            {
-                emitter.StartSimulation();
-            }
-        }
-    }
     private IEnumerator SwitchToHeadCameraAndBack(InsectEmitter emitter)
     {
         Debug.Log("머리 카메라 활성화 시도");
@@ -179,8 +163,8 @@ public class playerTestJ : MonoBehaviour
         Debug.Log("머리 카메라 활성화 완료");
 
         // 벌레 생성
-        //emitter.StartSimulation(insectDisplayTime);
-        emitter.StartSimulation();
+        emitter.StartSimulation(insectDisplayTime);
+
         yield return new WaitForSeconds(insectDisplayTime);
 
         Debug.Log("플레이어 카메라로 복귀 시도");
@@ -229,8 +213,8 @@ public class playerTestJ : MonoBehaviour
         float targetMouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * 0.01f;
 
         // SmoothDamp
-        currentMouseX = Mathf.Lerp(currentMouseX, targetMouseX, smoothTime);
-        currentMouseY = Mathf.Lerp(currentMouseY, targetMouseY, smoothTime);
+        currentMouseX = Mathf.SmoothDamp(currentMouseX, targetMouseX, ref mouseXVelocity, smoothTime);
+        currentMouseY = Mathf.SmoothDamp(currentMouseY, targetMouseY, ref mouseYVelocity, smoothTime);
 
         _xRotation -= currentMouseY;
         _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
