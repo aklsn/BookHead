@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.7
@@ -26405,6 +26405,8 @@ MonoBehaviour:
   bedCameraVolume: {fileID: 2045043191}
   fadeDuration: 2
   nextSceneName: mapScene_first_R
+  backTrigger: {fileID: 1648080454}
+  playerTargetPosition: {x: 4.921523, y: -1.63895, z: 21.12951}
 --- !u!4 &1591204949
 Transform:
   m_ObjectHideFlags: 0
@@ -30760,7 +30762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1507407262000968194, guid: 8d748bc6d3ed4024f8db84b24f8703ad, type: 3}
       propertyPath: simulationRangeZ
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1507407262000968194, guid: 8d748bc6d3ed4024f8db84b24f8703ad, type: 3}
       propertyPath: numberOfEmissions
