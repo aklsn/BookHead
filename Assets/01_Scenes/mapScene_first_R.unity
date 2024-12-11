@@ -16629,75 +16629,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3093511713981189538, guid: b3e2d1809197215468d5f85eefaab550, type: 3}
   m_PrefabInstance: {fileID: 1344301749}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1344380241
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1344380244}
-  - component: {fileID: 1344380243}
-  - component: {fileID: 1344380242}
-  m_Layer: 0
-  m_Name: Bed
-  m_TagString: Bed
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &1344380242
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1344380241}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.4898908, z: 2.4967122}
-  m_Center: {x: 0, y: -0.2550546, z: 0.45105147}
---- !u!114 &1344380243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1344380241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdd3d927e97e0c14988b02dbd40ed849, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsEventOn: 1
-  IsClick: 0
-  NextScene: MapScene_Raccoon_2
---- !u!4 &1344380244
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1344380241}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.116, y: 1.677, z: 7.283}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1350689458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23082,15 +23013,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c02fb0cbc3a22e749a23814d0882cff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 2
+  playerSpeed: 1
   mouseSensitivity: 100
   cameraTransform: {fileID: 1473353327}
   bounceAmplitude: 0.05
   bounceFrequency: 10
   cameraOffset: 0.2
   crosshair: {fileID: 2058361331}
-  defaultSprite: {fileID: 21300000, guid: e4f1fee3de32377429fd1348fae62b10, type: 3}
-  interactSprite: {fileID: 21300000, guid: 2a104a3f952ce16459e50de19cb44519, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 74a89c4ec057e4ef2be39b0e08d2965a, type: 3}
+  interactSprite: {fileID: 21300000, guid: a61f0d545a5f44d86a87b065ba012b2c, type: 3}
   footAudioSource: {fileID: 1522921922}
   footAudioClip: {fileID: 8300000, guid: b75c5c1b8bce29841a213eadb12c6a80, type: 3}
 --- !u!82 &1522921922
@@ -30965,7 +30896,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 25, y: 25}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2058361331
 MonoBehaviour:
@@ -32338,7 +32269,6 @@ SceneRoots:
   - {fileID: 249957583}
   - {fileID: 1224259740}
   - {fileID: 354100479}
-  - {fileID: 1344380244}
   - {fileID: 1522921920}
   - {fileID: 1441128619}
   - {fileID: 264898703}
