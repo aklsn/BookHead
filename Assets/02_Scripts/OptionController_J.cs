@@ -2,22 +2,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class OptionController_J : MonoBehaviour
 {
     public static OptionController_J Instance; // 싱글톤 인스턴스
 
     [SerializeField] private GameObject optionPanel; // 옵션 창
+    [SerializeField] private GameObject Back;
     [SerializeField] private Slider soundSlider;
     [SerializeField] private Slider sensitivitySlider;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private Button backButton;
 
     private bool isOptionOpen = false; // 옵션 창 열림 여부
+    private string menuSceneName = "MenuScene"; // Back 패널이 활성화될 씬 이름
 
     private void Awake()
     {
-        // 기존 OptionController_J 초기화 코드
         if (Instance == null)
         {
             Instance = this;
@@ -29,7 +31,6 @@ public class OptionController_J : MonoBehaviour
             return;
         }
 
-        // EventSystem 관리
         EnsureEventSystem();
     }
 
@@ -50,17 +51,16 @@ public class OptionController_J : MonoBehaviour
 
     private void Start()
     {
-        // 옵션 창 초기화
         optionPanel.SetActive(false);
+        Back.SetActive(IsInMenuScene());
 
-        // 슬라이더와 드롭다운 초기화
         soundSlider.minValue = 0;
         soundSlider.maxValue = 100;
         soundSlider.value = GameManager_J.Instance.masterVolume * 100;
 
         sensitivitySlider.minValue = 10;
         sensitivitySlider.maxValue = 100;
-        sensitivitySlider.value = GameManager_J.Instance.mouseSensitivity*100;
+        sensitivitySlider.value = GameManager_J.Instance.mouseSensitivity * 100;
 
         resolutionDropdown.options.Clear();
         resolutionDropdown.options.Add(new TMP_Dropdown.OptionData("1920x1080"));
@@ -70,7 +70,6 @@ public class OptionController_J : MonoBehaviour
         resolutionDropdown.value = GameManager_J.Instance.resolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
-        // 이벤트 등록
         soundSlider.onValueChanged.AddListener(delegate { AdjustSound(); });
         sensitivitySlider.onValueChanged.AddListener(delegate { AdjustSensitivity(); });
         resolutionDropdown.onValueChanged.AddListener(delegate { AdjustResolution(); });
@@ -79,25 +78,24 @@ public class OptionController_J : MonoBehaviour
 
     private void Update()
     {
-        // ESC 키 입력으로 옵션 창 토글
+        // ESC 키 입력 무시 조건
+        if (IsInMenuScene())
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ToggleOptionPanel();
         }
-
-        // UI 클릭만 허용
-        if (isOptionOpen && EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
-        {
-            Debug.Log("UI Clicked! Input on game objects is blocked.");
-        }
     }
 
-    private void ToggleOptionPanel()
+    public void ToggleOptionPanel()
     {
         isOptionOpen = !isOptionOpen;
         optionPanel.SetActive(isOptionOpen);
+        Back.SetActive(isOptionOpen ? false : IsInMenuScene());
 
-        // 옵션 창 열리면 게임 멈춤
         if (isOptionOpen)
         {
             Time.timeScale = 0; // 게임 일시정지
@@ -109,6 +107,7 @@ public class OptionController_J : MonoBehaviour
             Time.timeScale = 1; // 게임 재개
             Cursor.lockState = CursorLockMode.Locked; // 커서 잠금
             Cursor.visible = false; // 커서 숨기기
+            ResetEventSystemFocus();
         }
     }
 
@@ -116,18 +115,32 @@ public class OptionController_J : MonoBehaviour
     {
         isOptionOpen = false;
         optionPanel.SetActive(false);
+        Back.SetActive(IsInMenuScene());
         Time.timeScale = 1; // 게임 재개
+
+        if (!IsInMenuScene())
+        {
+            Cursor.lockState = CursorLockMode.Locked; // 커서 잠금
+            Cursor.visible = false; // 커서 숨기기
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None; // MenuScene에서는 커서 잠금 해제
+            Cursor.visible = true; // MenuScene에서는 커서 표시
+        }
+
+        ResetEventSystemFocus();
     }
 
     public bool IsOptionOpen()
     {
-        return isOptionOpen; // 옵션 창 상태 반환
+        return isOptionOpen;
     }
 
     private void AdjustSound()
     {
         GameManager_J.Instance.SetMasterVolume(soundSlider.value / 100f);
-        GameManager_J.Instance.UpdateAudioListener(); // AudioListener 업데이트
+        GameManager_J.Instance.UpdateAudioListener();
         GameManager_J.Instance.SavaOptionData();
     }
 
@@ -136,12 +149,10 @@ public class OptionController_J : MonoBehaviour
         GameManager_J.Instance.mouseSensitivity = sensitivitySlider.value;
         GameManager_J.Instance.SavaOptionData();
 
-        // PlayerControl의 mouseSensitivity 업데이트
         var player = FindObjectOfType<PlayerControl>();
         if (player != null)
         {
             player.mouseSensitivity = sensitivitySlider.value;
-            Debug.Log("PlayerControl sensitivity updated: " + player.mouseSensitivity);
         }
     }
 
@@ -161,5 +172,18 @@ public class OptionController_J : MonoBehaviour
         }
 
         GameManager_J.Instance.SavaOptionData();
+    }
+
+    private void ResetEventSystemFocus()
+    {
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+    }
+
+    private bool IsInMenuScene()
+    {
+        return SceneManager.GetActiveScene().name == menuSceneName;
     }
 }
