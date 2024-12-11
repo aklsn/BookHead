@@ -51,7 +51,7 @@ public class playerTestJ : MonoBehaviour
     private bool is_on = false;
 
     public GameObject[] emitterObjects;
-
+    public GameObject linkedDoor;
     private void Start()
     {
         currentCamera = playerCamera;
@@ -136,12 +136,15 @@ public class playerTestJ : MonoBehaviour
                 else if (hit.collider.CompareTag("Insect") && is_on == false) // 벌레 클릭 처리
                 {
                     is_on = true;
+
                     InsectEmitter emitter = hit.collider.GetComponent<InsectEmitter>();
                     if (emitter != null)
                     {
                         StartCoroutine(SwitchToHeadCameraAndBack(emitter));
                     }
+
                     StartEmitters();
+                    UnlockDoor();
                 }
             }
         }
@@ -150,7 +153,25 @@ public class playerTestJ : MonoBehaviour
             crosshair.sprite = defaultSprite;
         }
     }
-
+    private void UnlockDoor()
+    {
+        doorController door = linkedDoor.GetComponent<doorController>();
+        if (door != null)
+        {
+            if (door.CloseControl)
+            {
+                door.CloseControl = false; // 문 잠금 해제
+            }
+            else
+            {
+                Debug.Log($"문 {linkedDoor.name}는 이미 열려 있거나 잠겨 있지 않습니다.");
+            }
+        }
+        else
+        {
+            Debug.LogError("linkedDoor에 doorController가 없습니다.");
+        }
+    }
     private void StartEmitters()
     {
         foreach (GameObject emitterObject in emitterObjects)

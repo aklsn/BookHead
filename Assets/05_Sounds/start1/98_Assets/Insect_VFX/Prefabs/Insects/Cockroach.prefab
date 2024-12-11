@@ -9,6 +9,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 99a97578404ffc3438c1c2f96d744c10, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 99a97578404ffc3438c1c2f96d744c10, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 99a97578404ffc3438c1c2f96d744c10, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 99a97578404ffc3438c1c2f96d744c10, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -53,7 +65,7 @@ PrefabInstance:
       value: Cockroach
       objectReference: {fileID: 0}
     - target: {fileID: 1463514891198884348, guid: 99a97578404ffc3438c1c2f96d744c10, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f1c1dd04393401749aeec0228f8eaa7c, type: 2}
     - target: {fileID: 5866666021909216657, guid: 99a97578404ffc3438c1c2f96d744c10, type: 3}

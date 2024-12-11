@@ -179,9 +179,13 @@ namespace Insect_VFX
         }
 
         #endregion
-
+        public Transform playerCamera;
         void Awake()
         {
+            if (GameObject.FindGameObjectWithTag("MainCamera") != null)
+            {
+                playerCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
+            }
             if (entityParent == null)
             {
                 if (GameObject.Find("_EntityParent") != null)
@@ -192,17 +196,37 @@ namespace Insect_VFX
 
             InitializePooling();
         }
+        private int updateFrequency = 2;
+        private int frameCounter = 0;
 
+        public float activationDistance = 50f;
         void Update()
         {
             if (emittedObjects.Length == 0)
                 return;
+
+            frameCounter++;
+            if (frameCounter % updateFrequency != 0)
+                return; // 업데이트 주기에 해당하지 않으면 종료
 
             for (int i = 0; i < numberOfEmissions; i++)
             {
                 if (emittedObjects[i] == null || pathPoints[i] == null || pathPoints[i].Length == 0)
                     continue;
 
+                // 거리 계산 및 활성화/비활성화
+                float distance = Vector3.Distance(playerCamera.position, emittedObjects[i].transform.position);
+                if (distance > activationDistance)
+                {
+                    emittedObjects[i].SetActive(false);
+                    continue; // 비활성화된 객체는 추가 업데이트를 하지 않음
+                }
+                else
+                {
+                    emittedObjects[i].SetActive(true);
+                }
+
+                // 활성화된 벌레의 이동 및 업데이트 로직
                 if (pauseTimers[i] > 0)
                 {
                     pauseTimers[i] -= Time.deltaTime;
@@ -252,10 +276,11 @@ namespace Insect_VFX
             }
         }
 
+
         void InitializePooling()
         {
             objectPool = new Queue<GameObject>();
-            for (int i = 0; i < numberOfEmissions; i++)
+            for (int i = 0; i < numberOfEmissions*2; i++)
             {
                 GameObject obj = Instantiate(emissionObject, entityParent);
                 obj.transform.position = transform.position;
