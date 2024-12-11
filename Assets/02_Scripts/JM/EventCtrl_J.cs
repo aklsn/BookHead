@@ -139,6 +139,21 @@ public class EventCtrl_J : MonoBehaviour
 
         // 이동 시작 플래그 활성화
         isMoving = true;
+
+        // AudioSource 플레이
+        if (targetObject != null)
+        {
+            AudioSource audioSource = targetObject.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.Play();
+                Debug.Log("Trigger Object의 AudioSource가 재생되었습니다.");
+            }
+            else
+            {
+                Debug.LogWarning("Trigger Object에 AudioSource가 없습니다.");
+            }
+        }
     }
 
     private void MoveTargetObjectSmoothly()
