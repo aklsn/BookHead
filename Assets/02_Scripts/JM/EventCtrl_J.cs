@@ -225,6 +225,10 @@ public class EventCtrl_J : MonoBehaviour
         if (bedEventTriggered) return; // 이벤트 중복 방지
         bedEventTriggered = true;
 
+        // Fog 활성화 및 설정
+        RenderSettings.fog = true;
+        RenderSettings.fogDensity = 0.3f;
+
         if (bedCamera != null)
         {
             bedCamera.SetActive(true); // 카메라 활성화
@@ -238,23 +242,18 @@ public class EventCtrl_J : MonoBehaviour
             Invoke(nameof(ActivateRigidbody), 2.3f);
         }
     }
+
     private void ActivateRigidbody()
     {
         if (bedEventObject != null)
         {
-            // Rigidbody 활성화
             Rigidbody rb = bedEventObject.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.isKinematic = false; // Rigidbody 활성화
                 rb.useGravity = true;   // 중력 활성화
             }
-            else
-            {
-                Debug.LogWarning("bedEventObject에 Rigidbody가 없습니다.");
-            }
 
-            // Y축 기준으로 180도 회전하면서 회전 진행
             StartCoroutine(RotateObject(bedEventObject, Quaternion.Euler(0, 0, 0), 0.3f));
         }
     }
@@ -274,8 +273,8 @@ public class EventCtrl_J : MonoBehaviour
         }
 
         obj.transform.rotation = targetRotation; // 보정
-        Debug.Log("회전 완료");
     }
+
     private IEnumerator FadeExposureToZero()
     {
         float elapsedTime = 0f;
@@ -297,6 +296,8 @@ public class EventCtrl_J : MonoBehaviour
         {
             bedCamera.SetActive(false); // 카메라 비활성화
         }
+
+        RenderSettings.fog = false; // Fog 비활성화
 
         // 씬 전환
         if (!string.IsNullOrEmpty(nextSceneName))
