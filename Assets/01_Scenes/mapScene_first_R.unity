@@ -2772,7 +2772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsEventOn: 0
   IsClick: 0
-  NextScene: EndingScene
+  NextScene: 
 --- !u!1001 &128339148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7411,7 +7411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Scuttle: {fileID: 1069081364}
   ScuttleOpenAngle: -30
-  rotationSpeed: 2
+  rotationSpeed: 4
   Mannequin: {fileID: 866147968}
   ScuttleAudioSource: {fileID: 503559230}
   ScuttleAudioClip: {fileID: 8300000, guid: 0921c6f7104eca248b33b7d02708e469, type: 3}
@@ -7568,6 +7568,8 @@ MonoBehaviour:
   mannequines: {fileID: 128686143}
   shakeDuration: 1
   shakeMagnitude: 2
+  LastEventAudioSource: {fileID: 503559230}
+  LastEventAudioClip: {fileID: 8300000, guid: 3d4995491894cbb4faad2e2581305d1e, type: 3}
 --- !u!1 &507094880
 GameObject:
   m_ObjectHideFlags: 0
