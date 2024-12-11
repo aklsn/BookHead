@@ -18,6 +18,9 @@ public class LastEvent : MonoBehaviour
 
     Vector3 initialPosition;
 
+    public AudioSource LastEventAudioSource;
+    public AudioClip LastEventAudioClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +68,7 @@ public class LastEvent : MonoBehaviour
 
     IEnumerator Shake()
     {
+        LastEventAudioSource.PlayOneShot(LastEventAudioClip);
         float elapsedTime = 0f;
         while (elapsedTime < shakeDuration)
         {
@@ -73,5 +77,6 @@ public class LastEvent : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         playerCamera.transform.position = initialPosition;
+        LastEventAudioSource.Stop();
     }
 }

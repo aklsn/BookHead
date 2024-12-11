@@ -230,10 +230,13 @@ public class playerTestD : MonoBehaviour
         {
             if (!isfootAudioPlay)
             {
-                footAudioSource.clip = footAudioClip;
-                footAudioSource.loop = true;
-                footAudioSource.Play();
-                isfootAudioPlay = true;
+                if (MoveControl == false)
+                {
+                    footAudioSource.clip = footAudioClip;
+                    footAudioSource.loop = true;
+                    footAudioSource.Play();
+                    isfootAudioPlay = true;
+                }
             }
         }
         else
