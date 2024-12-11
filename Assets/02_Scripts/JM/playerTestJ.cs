@@ -119,10 +119,14 @@ public class playerTestJ : MonoBehaviour
                 }
                 else if (hit.collider.CompareTag("Bed")) // 침대 클릭 처리
                 {
-                    BedScript_Raccoon bed = hit.collider.GetComponent<BedScript_Raccoon>();
-                    if (bed != null && bed.IsEventOn == true)
+                    EventCtrl_J eventCtrl = FindObjectOfType<EventCtrl_J>();
+                    if(eventCtrl != null)
                     {
-                        bed.IsClick = true;
+                        eventCtrl.StartBedEvent();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("이벤트 못 찾음");
                     }
                 }
                 else if (hit.collider.CompareTag("Light")) // 조명 클릭 처리
@@ -137,7 +141,11 @@ public class playerTestJ : MonoBehaviour
                 {
                     is_on = true;
 
+                    AudioSource insectAudio = hit.collider.GetComponent<AudioSource>();
                     InsectEmitter emitter = hit.collider.GetComponent<InsectEmitter>();
+                    if (insectAudio != null) {
+                        insectAudio.Play();
+                    }
                     if (emitter != null)
                     {
                         StartCoroutine(SwitchToHeadCameraAndBack(emitter));
