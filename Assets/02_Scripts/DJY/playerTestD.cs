@@ -312,14 +312,24 @@ public class playerTestD : MonoBehaviour
 
         if (other.gameObject.name == "Monster_Trigger")
         {
-            GameObject doorlook3 = GameObject.Find("doorLockManager3");
-            LockableDoorManager1 dr = doorlook3.GetComponent<LockableDoorManager1>();
-
-            dr.LockDoor();
-            GameObject doorTrigger = GameObject.Find("Monster_Trigger");
-            doorTrigger.SetActive(false);
-            dr.UnlockDoor();
+            StartCoroutine(LockAndUnlock());
         }
+    }
+
+    private IEnumerator LockAndUnlock()
+    {
+        GameObject doorlook3 = GameObject.Find("doorLockManager3");
+        LockableDoorManager1 dr = doorlook3.GetComponent<LockableDoorManager1>();
+
+        dr.LockDoor();
+
+        // 7초 대기
+        yield return new WaitForSeconds(7);
+
+        GameObject doorTrigger = GameObject.Find("Monster_Trigger");
+        doorTrigger.SetActive(false);
+
+        dr.UnlockDoor();
     }
 }
 
