@@ -2837,16 +2837,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7805931319428811646, guid: 2ca8f29b29799214983549d368486e88, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 518956701634393354, guid: 2ca8f29b29799214983549d368486e88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 128339151}
   m_SourcePrefab: {fileID: 100100000, guid: 2ca8f29b29799214983549d368486e88, type: 3}
 --- !u!4 &128339149 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7053115438401716784, guid: 2ca8f29b29799214983549d368486e88, type: 3}
   m_PrefabInstance: {fileID: 128339148}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &128339150 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 518956701634393354, guid: 2ca8f29b29799214983549d368486e88, type: 3}
+  m_PrefabInstance: {fileID: 128339148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &128339151
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128339150}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.2140491, y: 0.98069096, z: 2.5165737}
+  m_Center: {x: -0.000000923872, y: 0.49034542, z: 0.000001013279}
 --- !u!1 &128686143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3862,6 +3892,7 @@ MonoBehaviour:
   connectedRoom1: {fileID: 0}
   connectedRoom2: {fileID: 0}
   open: 0
+  isOpen: 0
   EventOn: 0
   CloseControl: 0
   connectedRoom: {fileID: 0}
@@ -8564,6 +8595,7 @@ MonoBehaviour:
   connectedRoom1: {fileID: 0}
   connectedRoom2: {fileID: 0}
   open: 0
+  isOpen: 0
   EventOn: 0
   CloseControl: 0
   connectedRoom: {fileID: 0}
@@ -13285,6 +13317,7 @@ MonoBehaviour:
   connectedRoom1: {fileID: 0}
   connectedRoom2: {fileID: 0}
   open: 0
+  isOpen: 0
   EventOn: 0
   CloseControl: 1
   connectedRoom: {fileID: 0}
@@ -13598,6 +13631,7 @@ MonoBehaviour:
   connectedRoom1: {fileID: 0}
   connectedRoom2: {fileID: 0}
   open: 0
+  isOpen: 0
   EventOn: 0
   CloseControl: 1
   connectedRoom: {fileID: 0}
@@ -27573,6 +27607,7 @@ MonoBehaviour:
   connectedRoom1: {fileID: 0}
   connectedRoom2: {fileID: 0}
   open: 0
+  isOpen: 0
   EventOn: 0
   CloseControl: 0
   connectedRoom: {fileID: 0}

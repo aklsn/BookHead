@@ -11,7 +11,7 @@ public class BackTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if(!doorController.open)
+            if(!doorController.isOpen)
             PlayerTransform.position = new Vector3(5, 1.1f, 2);
         }
     }

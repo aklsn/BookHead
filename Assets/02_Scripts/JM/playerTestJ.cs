@@ -57,7 +57,7 @@ public class playerTestJ : MonoBehaviour
         currentCamera = playerCamera;
         _rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
-        //mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
+        mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
         if (cameraTransform != null)
         {
             _initialCameraPosition = cameraTransform.localPosition;
@@ -66,7 +66,7 @@ public class playerTestJ : MonoBehaviour
 
     private void Update()
     {
-        //mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
+        mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
         // 옵션 창이 열려 있는 경우
         if (OptionController_J.Instance != null && OptionController_J.Instance.IsOptionOpen())
         {

@@ -52,7 +52,7 @@ public class playerTestD : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
-        //mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
+        mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
         if (cameraTransform != null)
         {
             _initialCameraPosition = cameraTransform.localPosition;
@@ -61,7 +61,7 @@ public class playerTestD : MonoBehaviour
 
     private void Update()
     {
-        //mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
+        mouseSensitivity = GameManager_J.Instance.mouseSensitivity;
         // 옵션 창이 열려 있는 경우
         if (OptionController_J.Instance != null && OptionController_J.Instance.IsOptionOpen())
         {
@@ -261,11 +261,13 @@ public class playerTestD : MonoBehaviour
         {
             GameObject lpPlayer = GameObject.FindWithTag("Lp");
             LPTrigger lp = lpPlayer.GetComponent<LPTrigger>();
-
+            GameObject backtrigger = GameObject.Find("BackDoor");
+            doorController back = backtrigger.GetComponent<doorController>();
             // 사운드가 재생 중인지 확인
             if (!lp.sound1.isPlaying)
             {
                 lp.IsLp = true;
+                back.isOpen = true;
                 lp.sound1.Play(); // 사운드 재생
             }
         }
@@ -297,8 +299,11 @@ public class playerTestD : MonoBehaviour
         {
             GameObject doorlook = GameObject.Find("doorLockManager");
             LockableDoorManager1 dr = doorlook.GetComponent<LockableDoorManager1>();
+            GameObject backtrigger = GameObject.Find("BackDoor");
+            doorController back = backtrigger.GetComponent<doorController>();
 
             dr.LockDoor();
+            back.isOpen = true;
             GameObject doorTrigger = GameObject.Find("SoundTriggerPoint1");
             doorTrigger.SetActive(false);
         }
