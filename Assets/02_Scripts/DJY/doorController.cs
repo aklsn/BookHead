@@ -14,6 +14,7 @@ public class doorController : MonoBehaviour
 
     public bool open = false; // 문 상태
     private bool isLocked = false;
+    public bool isOpen = false;
 
     public bool EventOn = false;
     public bool CloseControl = false; // 인스펙터에서 체크해놓으면 문 잠기게
@@ -28,6 +29,11 @@ public class doorController : MonoBehaviour
     public AudioClip CantOpenDoor;
 
     private bool _previousState = false;
+
+    private void Start()
+    {
+        isOpen = false;
+    }
 
     void Update()
     {

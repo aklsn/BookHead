@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CreditsScroller : MonoBehaviour
 {
@@ -64,7 +65,7 @@ public class CreditsScroller : MonoBehaviour
     }
     private void QuitGame()
     {
-        Application.Quit();
+        SceneManager.LoadScene("MenuScene");
     }
     private void StartCockroachMovement()
     {
